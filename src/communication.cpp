@@ -3,4 +3,4 @@
 // Devices: NRF24L01 Antenna Module
 // Skills: Radio communication, basic variable manipulation, reading documentation
 
-// Dibs: Bora A.,
+// Dibs: Bora A., Eli C.
