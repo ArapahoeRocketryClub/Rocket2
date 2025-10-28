@@ -8,5 +8,3 @@ void SendSignal(int val); // Sends signal to servos
 float GetValue(int pinNum); // Receives value from pin
 
 //Define some functions below:
-
-// test
