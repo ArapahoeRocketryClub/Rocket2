@@ -3,4 +3,4 @@
 // Devices: 9g Servo
 // Skills: Redundant / safe coding habits (parachutes are important!), reading documentation
 
-// Dibs: alex todd
+// Dibs: alex todd, Jacob B.
