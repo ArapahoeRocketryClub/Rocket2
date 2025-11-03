@@ -4,3 +4,4 @@
 
 //Define some functions below:
 
+void WriteServo(double x, double y);
