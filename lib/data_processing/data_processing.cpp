@@ -5,19 +5,36 @@
 
 // Dibs: Jordan T.,Drew F,Jacob B
 #define MeasVarAccel 2
-#define MeasVarAngrVel 2
+#define MeasVarAngVel 2
 
 #include "data_processing.h"
 #include "kalmanfilter.h"
 #include "global.h"
 
 void createDataHolders(){
-    static Acceleration unfilteredAccel;
-    static AngularVelocity unfilteredAngVel;
-    static Position position;
-    static Orientation formattedOrientation;
+    namespace dataTemps {
+        extern Acceleration accel;
+        extern AngularVelocity angVel;
+        extern Position position;
+        extern Orientation formattedOrientation;
+        
+        extern kFilter filterAccelX(MeasVarAccel,0);
+        extern kFilter filterAccelY(MeasVarAccel,0);
+        extern kFilter filterAccelZ(MeasVarAccel,0);
+
+        extern kFilter filterAngVelX(MeasVarAngVel,0);
+        extern kFilter filterAngVelY(MeasVarAngVel,0);
+        extern kFilter filterAngVelZ(MeasVarAngVel,0);
+    }
     
-    static kFilter filterAccelX(MeasVarAccel,0);
-    static kFilter filterAccelY(MeasVarAccel,0);
-    static kFilter filterAccelZ(MeasVarAccel,0);
+};
+
+//void filterData(){
+//    Acceleration accelTemp = GetAcceleration();
+//    dataTemps::accel.x = data:
+//};
+
+void updateGlobalData(){
+    globalPosition = dataTemps::position;
+    globalOrientation = dataTemps::formattedOrientation;
 };

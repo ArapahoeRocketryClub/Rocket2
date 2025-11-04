@@ -8,3 +8,4 @@ void InitIMU(); // BMO085
 void InitBarometer(); // BMP180
 void InitRadio(); // NRF24
 void TestSystems(); // Blink LED, move TVC mount within range of motion to see if anything blocks it, etc
+void InitServo();

@@ -27,6 +27,8 @@ struct AngularVelocity {
     double z; // z angular velocity in !RADIANS/SECOND!
 };
 
+void ReportError(); // Publishes an error by sending it over radio and
+
 extern Position globalPosition;
 extern Acceleration globalAcceleration;
 extern Orientation globalOrientation;
