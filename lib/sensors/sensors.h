@@ -4,10 +4,20 @@
 #include <global.h> // For access to kinematic datatypes
 
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
-//Define some functions below:
 
-// 'Get' Function for each entry 
 
+/*
+You should implement functions to grab data from the following sensors (TONS of documentation and examples are available online, just find one that you like!):
+
+Adafruit BNO085 9-DOF Orientation IMU Fusion Breakout, which measures...
+* Acceleration and gravity
+* Angular velocity
+* Magnetic field strength (for compass) ---- Implementing this is not necessary. It could be a fun challenge, though!
+
+BMP180
+* Air Pressure
+* Altitude above ground
+*/
 Acceleration GetAcceleration(); // See global.h for Acceleration struct
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct
-double GetTemp(); // Celsius
+void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure

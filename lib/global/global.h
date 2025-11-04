@@ -1,3 +1,6 @@
+// The "global" file is like a community pile for data. It hosts our custom data types (vectors, usually in the form of structs)
+// This should be used for things used by more than a single file. All other variables should be contained within their file. 
+
 #pragma once
 
 struct Position {
@@ -15,7 +18,7 @@ struct Acceleration {
 struct Orientation {
     double x; // x orientation in !RADIANS!, relative to orientation at init
     double y; // y orientation in !RADIANS!, relative to orientation at init
-    // No need for z orientation, we cannot control it nor do we care about it
+    // No need for z orientation, we cannot control it with TVC, nor do we care about it
 };
 
 struct AngularVelocity {

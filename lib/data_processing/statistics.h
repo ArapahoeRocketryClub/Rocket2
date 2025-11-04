@@ -1,4 +1,4 @@
-//list of statistics functions which might be useful
+// Collection of statistics functions which might be useful, especially for data
 
 //returns the square of the argument
 template <typename type> type square(type val){
@@ -34,6 +34,5 @@ template <typename type> type sampVar(type* currentVal, int numTerms){
         currentVal += 1;
         partialSquareSum += square(*currentVal - avg);
     }
-
     return partialSquareSum / static_cast<type>(numTerms - 1);
 };
