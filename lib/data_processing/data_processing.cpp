@@ -4,37 +4,45 @@
 // Skills: Strong foundations in math and physics. Must be comfortable and enjoy working with vectors, matrices, and numbers. Also requires a strong sense of analyzing inputs/outputs, as most of this deals with converting raw data into usable numbers 
 
 // Dibs: Jordan T.,Drew F,Jacob B
-#define MeasVarAccel 2
-#define MeasVarAngVel 2
-
 #include "data_processing.h"
 #include "kalmanfilter.h"
 #include "global.h"
+#include "sensors.h"
 
-void createDataHolders(){
-    namespace dataTemps {
-        extern Acceleration accel;
-        extern AngularVelocity angVel;
-        extern Position position;
-        extern Orientation formattedOrientation;
-        
-        extern kFilter filterAccelX(MeasVarAccel,0);
-        extern kFilter filterAccelY(MeasVarAccel,0);
-        extern kFilter filterAccelZ(MeasVarAccel,0);
+void initDataHolders(){
+    // Currently assumes that the rocket is stationary at 0,0,0 when starting
+    dataTemps::accel.x = 0;
+    dataTemps::accel.y = 0;
+    dataTemps::accel.z = 0;
 
-        extern kFilter filterAngVelX(MeasVarAngVel,0);
-        extern kFilter filterAngVelY(MeasVarAngVel,0);
-        extern kFilter filterAngVelZ(MeasVarAngVel,0);
-    }
-    
+    dataTemps::angVel.x = 0;
+    dataTemps::angVel.y = 0;
+    dataTemps::angVel.z = 0;
+
+    dataTemps::position.x = 0;
+    dataTemps::position.y = 0;
+    dataTemps::position.z = 0;
+
+    dataTemps::formattedOrientation.x = 0;
+    dataTemps::formattedOrientation.y = 0;
 };
 
-//void filterData(){
-//    Acceleration accelTemp = GetAcceleration();
-//    dataTemps::accel.x = data:
-//};
+void filterData(){
+    Acceleration accelTemp = GetAcceleration();
+    //Steps kalman filters for the accelertation measurements and stores the new estimates into the temporary acceleration variable
+    dataTemps::accel.x = dataTemps::filterAccelX.step(accelTemp.x);
+    dataTemps::accel.y = dataTemps::filterAccelY.step(accelTemp.y);
+    dataTemps::accel.z = dataTemps::filterAccelZ.step(accelTemp.z);
+
+
+    //Steps kalman filters for the angular velocity measurements and stores the new estimates into the temporary angular velocity variable
+    AngularVelocity angVelTemp = GetAngularVelocity();
+    dataTemps::angVel.x = dataTemps::filterAngVelX.step(angVelTemp.x);
+    dataTemps::angVel.y = dataTemps::filterAngVelY.step(angVelTemp.y);
+    dataTemps::angVel.z = dataTemps::filterAngVelZ.step(angVelTemp.z);
+};
 
 void updateGlobalData(){
-    globalPosition = dataTemps::position;
-    globalOrientation = dataTemps::formattedOrientation;
+    globalPosition = dataTemps::position;//Updates global position variable
+    globalOrientation = dataTemps::formattedOrientation;//Updates global orientation variable
 };
