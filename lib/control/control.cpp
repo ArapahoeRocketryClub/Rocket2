@@ -23,15 +23,18 @@ bool override = false;
 // 90 is no movement
 void MoveServo(Servo servo, double rotation){
     if (!override){
-    servo.write(rotation);
+    servo.write((rotation*3.1)15)/180;
     }
 }
 
-double GetServoRotation(Servo servo){
-    return servo.read();
-}
+
 
 
 
 void checkServoWires(){};
-void 
+void checkpower(){};
+void checkServorotation(){}; //checks that servos can rotate properly ex 0 to 90
+void ifServoError(){};
+void SignalIntegrityCheck(){};
+void ServoFailsafe(){};
+void ServoManualOverride(){};

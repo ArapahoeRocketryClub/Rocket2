@@ -2,7 +2,7 @@
 #pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
 #include <Arduino.h> // Since .h header files are associated with C++, not pure arduino, we have to include Arduino
 #include <global.h> // For access to kinematic datatypes
-
+#include <Adafruit_BNO08x.h>
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
 
 
@@ -18,6 +18,14 @@ BME280
 * Air Pressure
 * Altitude above ground
 */
+
+
+
+
+double GetServoRotation(Servo servo){
+    return servo.read();
+}
+
 Acceleration GetAcceleration(); // See global.h for Acceleration struct
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct
 void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure
