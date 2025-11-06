@@ -3,6 +3,11 @@
 
 #pragma once
 
+const int PIN_SERVO_X = 1;
+const int PIN_SERVO_Y = 2;
+const int RADIO_PIN_CE = 3;
+const int RADIO_PIN_CSN = 3;
+
 struct Position {
     double x; // x position in meters, relative to point at init 
     double y; // y position in meters, relative to point at init

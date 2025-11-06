@@ -21,5 +21,6 @@ void InitRadio()
     delay(1000); // Allow for radio to stabilize
 }
 
+
 ServoX.attach(PIN_SERVO_X);
 ServoY.attach(PIN_SERVO_Y);

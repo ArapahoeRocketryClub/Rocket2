@@ -14,7 +14,7 @@ Adafruit BNO085 9-DOF Orientation IMU Fusion Breakout, which measures...
 * Angular velocity
 * Magnetic field strength (for compass) ---- Implementing this is not necessary. It could be a fun challenge, though!
 
-BMP180
+BME280
 * Air Pressure
 * Altitude above ground
 */

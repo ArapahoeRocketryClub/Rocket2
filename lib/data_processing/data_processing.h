@@ -7,9 +7,9 @@
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
 
 // Code to run at beginning
-namespace dataTemps {//Temporary Variables to be used for data processing
-    extern Acceleration accel;
-    extern AngularVelocity angVel;
+namespace dataTemps {//Temporary Variables to be used for data processing.
+    extern Acceleration accel;//Stores filtered acceleration data.
+    extern AngularVelocity angVel;//Stores filtered angular velocity data.
     extern Position position;
     extern Orientation formattedOrientation;
     
