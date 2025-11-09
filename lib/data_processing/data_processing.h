@@ -1,7 +1,7 @@
 // Header files are used to ensure that the files can communicate with each other
 #pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
 #include <Arduino.h>
-
+#include "kalmanfilter.h"
 #define MeasVarAccel 2 //Measurement Variance for acceleration (will need to be calculated for the imu)
 #define MeasVarAngVel 2 //Measurement Variance for angular velocity (will need to be calculated for the imu)
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs

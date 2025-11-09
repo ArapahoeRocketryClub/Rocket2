@@ -19,13 +19,16 @@ BME280
 * Altitude above ground
 */
 
-
-
+extern Adafruit_BNO08x bno08x;//This is the IMU sensor object.
 
 double GetServoRotation(Servo servo){
     return servo.read();
 }
 
+int initializeBno08x();//Sets up communication with BNO08x IMU sensor.
+int setReportsBno08x();//Tells the BNO08x what data to output needs to be updated every time sensor is reset.
+
+QuaternionRotation GetOrientation();
 Acceleration GetAcceleration(); // See global.h for Acceleration struct
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct
 void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure

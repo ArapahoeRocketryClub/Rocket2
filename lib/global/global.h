@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <Servo.h>
+
 const int PIN_SERVO_X = 1;
 const int PIN_SERVO_Y = 2;
 const int RADIO_PIN_CE = 3;
@@ -26,6 +28,15 @@ struct Orientation {
     // No need for z orientation, we cannot control it with TVC, nor do we care about it
 };
 
+struct QuaternionRotation {//Quaternion. Can be used store position data.
+    double w;//Real component
+    
+    //imaginary components
+    double i;
+    double j;
+    double k;
+};
+
 struct AngularVelocity {
     double x; // x angular velocity in !RADIANS/SECOND!
     double y; // y angular velocity in !RADIANS/SECOND!
@@ -38,3 +49,8 @@ extern Position globalPosition;
 extern Acceleration globalAcceleration;
 extern Orientation globalOrientation;
 extern AngularVelocity globalAngularVelocity;
+
+
+//Servos
+extern Servo ServoX;
+extern Servo ServoY;
