@@ -1,12 +1,12 @@
+#include "header.h"
 // Name: Init (Initialization)
 // Description: Functions related to initializing systems
 // Devices: Servos, BMP180 barometers, MPU6050 acceloremeter
 // Skills: Ability to implement documentation, safe coding habits (failure-tolerant code)
-#include <Arduino.h>
-#include <RF24.h>
+
 // Dibs: Jordan.T, Bora
 
-uint8_t address[][6] = { "1Node", "2Node" };
+uint8_t address[][6] = {"1Node", "2Node"};
 RF24 radio(RADIO_PIN_CE, RADIO_PIN_CSN);
 void InitRadio()
 {
@@ -21,6 +21,8 @@ void InitRadio()
     delay(1000); // Allow for radio to stabilize
 }
 
-
-ServoX.attach(PIN_SERVO_X);
-ServoY.attach(PIN_SERVO_Y);
+void InitServo()
+{
+    ServoX.attach(PIN_SERVO_X);
+    ServoY.attach(PIN_SERVO_Y);
+}

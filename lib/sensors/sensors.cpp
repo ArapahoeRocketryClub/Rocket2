@@ -1,13 +1,9 @@
+#include "header.h"
+
 // Name: DataCollection
 // Description: Functions related to the controlling motion (Example: servos for TVC, parachute deployment, etc)
 // Devices: BME280 Barometer (used for sensing pressure and calculating height. See the docs on how to do that), BNO085 accelerometer
 // Skills: Reading and implementing documentation (lots of resources are available, you just need to implment them!)
-#include "sensors.h"
-#include "global.cpp"
-#include <Adafruit_BMP280.h>
-#include <Adafruit_BNO08x.h>
-#include <Wire.h>
-
 
 // Dibs: Eli C.,Drew F
 
@@ -52,26 +48,27 @@ int initializeBno08x(){
     return 1; //Returns one if sensor connects
 };
 
-/*QuaternionRotation GetOrientation(){
-    if(bno08x.wasReset()){//checks if the sensor was reset
+int checkImuForData(){
+    if(bno08x.wasReset()){//Checks if the IMU was reset. If so, the reports are redone.
         setReportsBno08x();
     }
-    
-    if(bno08x.getSensorEvent(&sensorValue)){//Checks if the sensor value has a value
-        if (sensorValue.sensorId == SH2_ROTATION_VECTOR){//Checks if the value is the same value that is needed.
-            
-            //If the value is of the right type then it is stored in a temporary variable and returned.
-            QuaternionRotation temp;
-            temp.w = sensorValue.un.rotationVector.real;
-            temp.i = sensorValue.un.rotationVector.i;
-            temp.j = sensorValue.un.rotationVector.j;
-            temp.k = sensorValue.un.rotationVector.k;
+
+    if(bno08x.getSensorEvent(&sensorValue)){
+        switch (sensorValue.sensorId){
+            case SH2_ROTATION_VECTOR://Checks if sensor has rotation orientation data
+                //If the value is of the right type then it is stored in a temporary variable and returned.
+                QuaternionRotation temp;
+                temp.w = sensorValue.un.rotationVector.real;
+                temp.i = sensorValue.un.rotationVector.i;
+                temp.j = sensorValue.un.rotationVector.j;
+                temp.k = sensorValue.un.rotationVector.k;
+                break;
         }
     }
+};
+
 
     
-};*/
-
 
 
 

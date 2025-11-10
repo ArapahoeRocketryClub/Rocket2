@@ -1,4 +1,4 @@
-#include <Servo.h>
+#include "header.h"
 // Name: Control
 // Description: Functions related to controlling motion (Example: servos for TVC, parachute deployment, etc)
 // Devices: 9g Servo
@@ -23,17 +23,13 @@ bool override = false;
 // 90 is no movement
 void MoveServo(Servo servo, double rotation){
     if (!override){
-    servo.write((rotation*3.1)15)/180;
+    servo.write((rotation*PI)/180);
     }
 }
 
-
-
-
-
 void checkServoWires(){};
 void checkpower(){};
-void checkServorotation(){}; //checks that servos can rotate properly ex 0 to 90
+void checkServoRotation(){}; //checks that servos can rotate properly ex 0 to 90
 void ifServoError(){};
 void SignalIntegrityCheck(){};
 void ServoFailsafe(){};

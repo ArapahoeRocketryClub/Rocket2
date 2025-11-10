@@ -1,3 +1,4 @@
+#include "header.h"
 //Class which allows for the filtering of raw input data.
 
 class kFilter{

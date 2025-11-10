@@ -1,3 +1,4 @@
+#include "header.h"
 // Collection of statistics functions which might be useful, especially for data
 
 //returns the square of the argument
