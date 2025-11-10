@@ -6,4 +6,4 @@
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
 
 void SendSignal(byte data);
-byte ReceiveSignal();
+void InterpretSignal(int signal);

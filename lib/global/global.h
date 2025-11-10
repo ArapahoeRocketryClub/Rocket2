@@ -4,10 +4,16 @@
 
 #pragma once
 
-const int PIN_SERVO_X = 1;
-const int PIN_SERVO_Y = 2;
-const int RADIO_PIN_CE = 3;
-const int RADIO_PIN_CSN = 3;
+// Constants --- PINS ARE PLACEHOLDERS FOR NOW
+const int PIN_SERVO_X = 69;
+const int PIN_SERVO_Y = 67;
+
+const int PIN_LED = 420;
+
+const int RADIO_PIN_CE = 42069;
+const int RADIO_PIN_CSN = 777;
+uint8_t address[][6] = {"1Node", "2Node"}; // For radio
+
 
 
 struct Position
@@ -48,14 +54,16 @@ struct AngularVelocity
     double z; // z angular velocity in !RADIANS/SECOND!
 };
 
-void ReportError(); // Publishes an error by sending it over radio and
+void ReportError(String error); // Publishes an error by sending it over radio and enabling led
 
 extern Position globalPosition;
 extern Acceleration globalAcceleration;
 extern Orientation globalOrientation;
 extern AngularVelocity globalAngularVelocity;
+extern QuaternionRotation globalQuaternionOrientation;
 
-// Servos
+// Devices
 extern Servo ServoX;
 extern Servo ServoY;
 extern Adafruit_BNO08x bno08x; // This is the IMU sensor object.
+RF24 radio(RADIO_PIN_CE, RADIO_PIN_CSN);

@@ -1,5 +1,4 @@
 #include "header.h"
-#include <Adafruit_BMP280.h>
 #include <Adafruit_BNO08x.h>
 
 // Header files are used to ensure that the files can communicate with each other
@@ -12,7 +11,7 @@ You should implement functions to grab data from the following sensors (TONS of 
 
 Adafruit BNO085 9-DOF Orientation IMU Fusion Breakout, which measures...
 * Acceleration and gravity
-* Angular velocity
+* Angular orientation
 * Magnetic field strength (for compass) ---- Implementing this is not necessary. It could be a fun challenge, though!
 
 BME280
@@ -28,7 +27,7 @@ int initializeBno08x();//Sets up communication with BNO08x IMU sensor.
 int setReportsBno08x();//Tells the BNO08x what data to output needs to be updated every time sensor is reset.
 int checkImuForData();//Checks for new IMU data. If so, the fucntion returns 1 and stores the data in the global variables.
 
-QuaternionRotation GetOrientation();
-Acceleration GetAcceleration(); // See global.h for Acceleration struct
-AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct
-void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure
+QuaternionRotation GetOrientation();//Reutrns quaternion orientation.
+Acceleration GetAcceleration(); // See global.h for Acceleration struct.
+AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct.
+void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure.

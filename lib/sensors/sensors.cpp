@@ -26,8 +26,8 @@ Adafruit_BNO08x bno08x;
 
 sh2_SensorValue_t sensorValue;
 
-int setReportsBno08x(){
-    if(!bno08x.enableReport(SH2_ROTATION_VECTOR,50000)){
+int setReportsBno08x(){//Enables reports for specific types of data
+    if(!bno08x.enableReport(SH2_ROTATION_VECTOR,50000)){//This asks the sensor to give orientation data every 50000 microseconds (This is 50 miliseconds).
         return 0; //Failure
     }
     return 1;//Success only happens if all of the report enabling is successful.
@@ -56,12 +56,11 @@ int checkImuForData(){
     if(bno08x.getSensorEvent(&sensorValue)){
         switch (sensorValue.sensorId){
             case SH2_ROTATION_VECTOR://Checks if sensor has rotation orientation data
-                //If the value is of the right type then it is stored in a temporary variable and returned.
-                QuaternionRotation temp;
-                temp.w = sensorValue.un.rotationVector.real;
-                temp.i = sensorValue.un.rotationVector.i;
-                temp.j = sensorValue.un.rotationVector.j;
-                temp.k = sensorValue.un.rotationVector.k;
+                //Updates global quaternion orientation with sensor data if it is available.
+                globalQuaternionOrientation.w = sensorValue.un.rotationVector.real;
+                globalQuaternionOrientation.i = sensorValue.un.rotationVector.i;
+                globalQuaternionOrientation.j = sensorValue.un.rotationVector.j;
+                globalQuaternionOrientation.k = sensorValue.un.rotationVector.k;
                 break;
         }
     }

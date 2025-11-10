@@ -1,6 +1,9 @@
 #pragma once
-// SUBSYSTEMS
+
+// GLOBAL
 #include "global.h"
+
+// SUBSYSTEMS
 #include "communication.h"
 #include "control.h"
 #include "sensors.h"
@@ -9,8 +12,8 @@
 #include "termination.h"
 #include "kalmanfilter.h"
 
-
-// GLOBAL
-
+// EXTERNAL LIBRARIES
 #include <Arduino.h>
 #include <Servo.h>
+#include <Adafruit_BNO08x.h>
+#include <Adafruit_BMP280.h>

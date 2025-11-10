@@ -7,8 +7,6 @@
 
 // Dibs: Jordan.T, Bora
 
-uint8_t address[][6] = {"1Node", "2Node"};
-RF24 radio(RADIO_PIN_CE, RADIO_PIN_CSN);
 void InitRadio()
 {
     if (!radio.begin())
@@ -27,3 +25,4 @@ void InitServo()
     ServoX.attach(PIN_SERVO_X);
     ServoY.attach(PIN_SERVO_Y);
 }
+
