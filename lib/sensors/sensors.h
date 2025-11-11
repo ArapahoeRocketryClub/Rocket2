@@ -23,7 +23,6 @@ double GetServoRotation(Servo servo){
     return servo.read();
 }
 
-int initializeBno08x();//Sets up communication with BNO08x IMU sensor.
 int setReportsBno08x();//Tells the BNO08x what data to output needs to be updated every time sensor is reset.
 int checkImuForData();//Checks for new IMU data. If so, the fucntion returns 1 and stores the data in the global variables.
 

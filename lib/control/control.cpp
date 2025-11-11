@@ -13,8 +13,6 @@
 //Error detection & logging
 //Manual override, test mode
 
-
-
 //vars to include
 bool override = false;
 
@@ -27,10 +25,31 @@ void MoveServo(Servo servo, double rotation){
     }
 }
 
-void checkServoWires(){};
-void checkpower(){};
-void checkServoRotation(){}; //checks that servos can rotate properly ex 0 to 90
-void ifServoError(){};
-void SignalIntegrityCheck(){};
-void ServoFailsafe(){};
-void ServoManualOverride(){};
+void SetLight(bool state, int pin) {
+    if(state == true) { 
+        digitalWrite(LED_BUILTIN, HIGH);
+    }
+    if(state == false) {
+        digitalWrite(LED_BUILTIN, LOW);
+    }
+}
+
+void servoTestRotation(){
+    // Move the servo to 0 degrees
+    myServo.write(0);
+    Serial.println("Moving to 0 degrees...");
+    //if something
+    delay(1000); // Wait for 1 second
+
+    // Move the servo to 90 degrees
+    myServo.write(90);
+    Serial.println("Moving to 90 degrees...");
+    //if something
+    delay(1000);
+
+    // Move the servo to 180 degrees
+    myServo.write(180);
+    Serial.println("Moving to 180 degrees...");
+    //if something
+    delay(1000);    
+}

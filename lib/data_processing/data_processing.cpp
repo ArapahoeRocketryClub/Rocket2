@@ -12,9 +12,10 @@ void initDataHolders(){
     dataTemps::accel.y = 0;
     dataTemps::accel.z = 0;
 
-    dataTemps::angVel.x = 0;
-    dataTemps::angVel.y = 0;
-    dataTemps::angVel.z = 0;
+    dataTemps::angPos.w = 0;
+    dataTemps::angPos.i = 0;
+    dataTemps::angPos.j = 0;
+    dataTemps::angPos.k = 0;
 
     dataTemps::position.x = 0;
     dataTemps::position.y = 0;
@@ -30,13 +31,6 @@ void filterData(){
     dataTemps::accel.x = dataTemps::filterAccelX.step(accelTemp.x);
     dataTemps::accel.y = dataTemps::filterAccelY.step(accelTemp.y);
     dataTemps::accel.z = dataTemps::filterAccelZ.step(accelTemp.z);
-
-
-    //Steps kalman filters for the angular velocity measurements and stores the new estimates into the temporary angular velocity variable
-    AngularVelocity angVelTemp = GetAngularVelocity();
-    dataTemps::angVel.x = dataTemps::filterAngVelX.step(angVelTemp.x);
-    dataTemps::angVel.y = dataTemps::filterAngVelY.step(angVelTemp.y);
-    dataTemps::angVel.z = dataTemps::filterAngVelZ.step(angVelTemp.z);
 };
 
 void updateGlobalData(){

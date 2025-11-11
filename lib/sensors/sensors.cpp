@@ -33,21 +33,6 @@ int setReportsBno08x(){//Enables reports for specific types of data
     return 1;//Success only happens if all of the report enabling is successful.
 };
 
-int initializeBno08x(){
-    Serial.begin(115200);
-    
-    while(!Serial) delayMicroseconds(1000);//Waits for the serial to begin. Checks every 1000 microseconds until it connects.
-    
-    Wire.begin();//Begins I2C protocol with the sensor.
-
-    if(!bno08x.begin_I2C()){
-        return 0;//If the sensor doesn't connect then the function returns 0 and quits
-    }
-
-    setReportsBno08x(); //Tells the sensor what data to output.
-    return 1; //Returns one if sensor connects
-};
-
 int checkImuForData(){
     if(bno08x.wasReset()){//Checks if the IMU was reset. If so, the reports are redone.
         setReportsBno08x();
@@ -66,7 +51,13 @@ int checkImuForData(){
     }
 };
 
+QuaternionRotation GetOrientation(){
+    return globalQuaternionOrientation;
+};
 
+Acceleration GetAcceleration(){
+    return globalAcceleration;
+};
     
 
 

@@ -8,17 +8,13 @@
 // Code to run at beginning
 namespace dataTemps {//Temporary Variables to be used for data processing.
     extern Acceleration accel;//Stores filtered acceleration data.
-    extern AngularVelocity angVel;//Stores filtered angular velocity data.
+    extern QuaternionRotation angPos;//Stores filtered angular velocity data.
     extern Position position;
     extern Orientation formattedOrientation;
     
     extern kFilter filterAccelX(MeasVarAccel,0);
     extern kFilter filterAccelY(MeasVarAccel,0);
     extern kFilter filterAccelZ(MeasVarAccel,0);
-    
-    extern kFilter filterAngVelX(MeasVarAngVel,0);
-    extern kFilter filterAngVelY(MeasVarAngVel,0);
-    extern kFilter filterAngVelZ(MeasVarAngVel,0);
 }
 
 void initDataHolders();//Adds inital data to temporary variables such as position and acceleration

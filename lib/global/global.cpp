@@ -10,5 +10,5 @@ void ReportError(String error) // Publishes an error by sending it over radio an
 {
     Serial.print(F("!ERROR!: "));
     Serial.println(error);
-    SetLight(true, PIN_LED)
+    SetLight(true, PIN_LED);
 }

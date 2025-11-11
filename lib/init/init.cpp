@@ -7,6 +7,10 @@
 
 // Dibs: Jordan.T, Bora
 
+void InitLED(){
+    pinMode(PIN_LED, OUTPUT);
+}
+
 void InitRadio()
 {
     if (!radio.begin())
@@ -26,3 +30,25 @@ void InitServo()
     ServoY.attach(PIN_SERVO_Y);
 }
 
+int InitIMU() {
+    Serial.begin(115200);
+    
+    while(!Serial) delayMicroseconds(1000);//Waits for the serial to begin. Checks every 1000 microseconds until it connects.
+    
+    Wire.begin();//Begins I2C protocol with the sensor.
+
+    if(!bno08x.begin_I2C()){
+        ReportError("BNO085 IMU failed to Start!");
+        return 0;//If the sensor doesn't connect then the function returns 0 and quits
+    }
+
+    setReportsBno08x(); //Tells the sensor what data to output.
+    return 1; //Returns one if sensor connects
+};
+
+
+//void servoSetupTest(x, serial) {
+    myServo.attach(x); // Attaches the servo on pin 9 to the servo object
+    Serial.begin(serial); // Initialize serial communication for debugging
+    Serial.println("Servo test started.");
+    }
