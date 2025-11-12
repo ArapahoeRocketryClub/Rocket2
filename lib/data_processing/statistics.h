@@ -37,3 +37,5 @@ template <typename type> type sampVar(type* currentVal, int numTerms){
     }
     return partialSquareSum / static_cast<type>(numTerms - 1);
 };
+
+QuaternionRotation quaternionMultiply(QuaternionRotation, QuaternionRotation);//<ultiplies two quternions using Hamiltonian product. This is useful for handling rotation data.

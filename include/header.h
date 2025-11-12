@@ -11,6 +11,7 @@
 #include "init.h"
 #include "termination.h"
 #include "kalmanfilter.h"
+#include "statistics.h"
 
 // EXTERNAL LIBRARIES
 #include <Arduino.h>
