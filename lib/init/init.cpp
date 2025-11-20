@@ -47,8 +47,13 @@ int InitIMU() {
 };
 
 
-//void servoSetupTest(x, serial) {
+void servoSetupTest(x, serial) {
     myServo.attach(x); // Attaches the servo on pin 9 to the servo object
     Serial.begin(serial); // Initialize serial communication for debugging
     Serial.println("Servo test started.");
     }
+
+void servoManualMove(x){
+    myServo.write(x);
+    delay(2000);
+}

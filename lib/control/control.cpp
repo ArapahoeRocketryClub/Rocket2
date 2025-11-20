@@ -35,6 +35,7 @@ void SetLight(bool state, int pin) {
 }
 
 void servoTestRotation(){
+
     // Move the servo to 0 degrees
     myServo.write(0);
     Serial.println("Moving to 0 degrees...");
