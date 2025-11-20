@@ -10,3 +10,4 @@ void InitRadio(); // NRF24
 void TestSystems(); // Blink LED, move TVC mount within range of motion to see if anything blocks it, etc
 void InitServo();
 void InitLED();
+void InitSerialPort();

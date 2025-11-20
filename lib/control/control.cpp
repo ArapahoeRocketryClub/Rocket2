@@ -16,6 +16,16 @@
 //vars to include
 bool override = false;
 
+// Moves servo manually ONLY when override is enabled
+void servoManualMove(int x) {
+    if (override) {
+        myServo.write(x);
+        delay(2000);
+    }
+}
+
+
+
 // keep in mind, 0 is full speed in one directction
 // 180 is full speed in the other
 // 90 is no movement
@@ -34,7 +44,10 @@ void SetLight(bool state, int pin) {
     }
 }
 
-void servoTestRotation(){
+void servoTestRotation(int x){
+    Servo myServo;
+    myServo.attach(x);
+
 
     // Move the servo to 0 degrees
     myServo.write(0);
@@ -52,5 +65,9 @@ void servoTestRotation(){
     myServo.write(180);
     Serial.println("Moving to 180 degrees...");
     //if something
-    delay(1000);    
+    delay(1000);
+}
+
+void servoconetionTest(){
+
 }

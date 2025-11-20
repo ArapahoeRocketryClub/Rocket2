@@ -31,12 +31,6 @@ void InitServo()
 }
 
 int InitIMU() {
-    Serial.begin(115200);
-    
-    while(!Serial) delayMicroseconds(1000);//Waits for the serial to begin. Checks every 1000 microseconds until it connects.
-    
-    Wire.begin();//Begins I2C protocol with the sensor.
-
     if(!bno08x.begin_I2C()){
         ReportError("BNO085 IMU failed to Start!");
         return 0;//If the sensor doesn't connect then the function returns 0 and quits
@@ -46,14 +40,12 @@ int InitIMU() {
     return 1; //Returns one if sensor connects
 };
 
+void InitSerialPort(){
+    Serial.begin(115200);
+    while(!Serial) delayMicroseconds(1000);//Waits for the serial to begin. Checks every 1000 microseconds until it connects.
+    Wire.begin();//Begins I2C protocol with the sensor.
+};
 
-void servoSetupTest(x, serial) {
-    myServo.attach(x); // Attaches the servo on pin 9 to the servo object
-    Serial.begin(serial); // Initialize serial communication for debugging
-    Serial.println("Servo test started.");
-    }
 
-void servoManualMove(x){
-    myServo.write(x);
-    delay(2000);
-}
+
+

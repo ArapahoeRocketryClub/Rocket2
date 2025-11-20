@@ -5,12 +5,6 @@
 void SetLight(bool state, int pin); // Sets the LED on given to the state (on/off)
 void MoveServo(Servo servo, double angle); // Moves the specified servo to an !RADIANS! (not degrees)
 
-
-void servoTestRotation(&Servo);
-
-
-        
-        
 /*
 void ifServoError(){};
 void SignalIntegrityCheck(){};

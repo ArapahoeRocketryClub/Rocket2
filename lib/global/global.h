@@ -61,8 +61,9 @@ extern Acceleration globalAcceleration;
 extern Orientation globalOrientation;
 extern AngularVelocity globalAngularVelocity;
 extern QuaternionRotation globalQuaternionOrientation;
-
-// Devices
+extern float Temperature;
+extern float Humidity;
+extern float Pressure;
 extern Servo ServoX;
 extern Servo ServoY;
 extern Adafruit_BNO08x bno08x; // This is the IMU sensor object.

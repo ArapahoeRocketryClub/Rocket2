@@ -7,10 +7,7 @@
 
 // Dibs: Eli C.,Drew F
 
-Adafruit_BMP280 barometer; // use I2C interface
-Adafruit_Sensor *barometer_temp = barometer.getTemperatureSensor();
-Adafruit_Sensor *barometer_pressure = barometer.getPressureSensor();
-
+Adafruit_BME280 barometer; // use I2C interface
 Adafruit_BNO08x bno08x;
 
 // Example:
@@ -32,7 +29,13 @@ int setReportsBno08x(){//Enables reports for specific types of data
     }
     return 1;//Success only happens if all of the report enabling is successful.
 };
+int checkBarometerForData(){
 
+    float temperature = barometer.readTemperature(); //degrees Celsius
+    float humidity = barometer.readHumidity() // Relative humidity percentage
+    float pressure = barometer.readPressure() // Pascals
+    
+}
 int checkImuForData(){
     if(bno08x.wasReset()){//Checks if the IMU was reset. If so, the reports are redone.
         setReportsBno08x();
@@ -47,10 +50,15 @@ int checkImuForData(){
                 globalQuaternionOrientation.j = sensorValue.un.rotationVector.j;
                 globalQuaternionOrientation.k = sensorValue.un.rotationVector.k;
                 break;
+            case SH2_ACCELEROMETER: //Checks if data in the sensor is acceleration data. 
+                //Updates global acceleration data with sensor data if it's available.
+                globalAcceleration.x = sensorValue.un.accelerometer.x     
+                globalAcceleration.y = sensorValue.un.accelerometer.y;
+                globalAcceleration.z = sensorValue.un.accelerometer.z;
+                break;
         }
     }
-};
-
+}
 QuaternionRotation GetOrientation(){
     return globalQuaternionOrientation;
 };

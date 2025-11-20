@@ -17,4 +17,4 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <Adafruit_BNO08x.h>
-#include <Adafruit_BMP280.h>
+#include <Adafruit_BME280.h>
