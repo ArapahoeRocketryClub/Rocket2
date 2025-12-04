@@ -2,7 +2,7 @@
 #include <RF24.h>
 // Name: Init (Initialization)
 // Description: Functions related to initializing systems
-// Devices: Servos, BMP180 barometers, MPU6050 acceloremeter
+// Devices: Servos, BME280 barometers, MPU6050 acceloremeter
 // Skills: Ability to implement documentation, safe coding habits (failure-tolerant code)
 
 // Dibs: Jordan.T, Bora
