@@ -19,7 +19,7 @@ bool override = false;
 // Moves servo manually ONLY when override is enabled
 void servoManualMove(int x) {
     if (override) {
-        myServo.write(x);
+        S.write(x);
         delay(2000);
     }
 }

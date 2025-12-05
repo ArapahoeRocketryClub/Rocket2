@@ -5,8 +5,8 @@
 #pragma once
 
 // Constants --- PINS ARE PLACEHOLDERS FOR NOW
-const int PIN_SERVO_X = 69;
-const int PIN_SERVO_Y = 67;
+const int PIN_SERVO_X = 2;
+const int PIN_SERVO_Y = 42;
 
 const int PIN_LED = 420;
 

@@ -5,10 +5,18 @@
 #include "header.h"
 
 void setup() {
-    Serial.begin(9600);
+    InitSerialPort();
     Serial.println(F("Arduino is now online!"));
+    InitIMU();
+    InitServo();
+
 }
 
 void loop() {
-
+    QuaternionRotation tempOrientation = GetOrientation();
+    Serial.print("Orientation w: %f i: %f j: %f k: %f\n");
+    Serial.print(tempOrientation.w);
+    Serial.print(tempOrientation.i);
+    Serial.print(tempOrientation.j);
+    Serial.println(tempOrientation.k);
 }
