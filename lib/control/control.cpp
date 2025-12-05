@@ -1,4 +1,4 @@
-#include "header.h"
+#include "control.h"
 // Name: Control
 // Description: Functions related to controlling motion (Example: servos for TVC, parachute deployment, etc)
 // Devices: 9g Servo
@@ -13,7 +13,7 @@
 //Error detection & logging
 //Manual override, test mode
 
-//vars to include
+/*//vars to include
 bool override = false;
 
 // Moves servo manually ONLY when override is enabled
@@ -23,16 +23,14 @@ void servoManualMove(int x) {
         delay(2000);
     }
 }
-
+*/
 
 
 // keep in mind, 0 is full speed in one directction
 // 180 is full speed in the other
 // 90 is no movement
 void MoveServo(Servo servo, double rotation){
-    if (!override){
     servo.write((rotation*PI)/180);
-    }
 }
 
 void SetLight(bool state, int pin) {

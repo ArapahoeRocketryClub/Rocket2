@@ -3,6 +3,8 @@
 
 // Do not sign up for this one right now. We will develop this once the rest are done.
 #include "header.h"
+#include "sensors.h"
+#include "init.h"
 
 void setup() {
     InitSerialPort();

@@ -1,4 +1,5 @@
-#include "header.h"
+#include "global.h"
+#include "control.h"
 
 Position globalPosition;
 Acceleration globalAcceleration;

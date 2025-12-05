@@ -1,5 +1,4 @@
-#include "header.h"
-#include <RF24.h>
+#include "communication.h"
 // Name: Communication
 // Description: Communicate with ground control device, receive and send data
 // Devices: NRF24L01 Antenna Module

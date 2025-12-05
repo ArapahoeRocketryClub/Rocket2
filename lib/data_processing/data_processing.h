@@ -1,9 +1,7 @@
-#include "header.h"
-// Header files are used to ensure that the files can communicate with each other
 #pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
-#define MeasVarAccel 2 //Measurement Variance for acceleration (will need to be calculated for the imu)
-#define MeasVarAngVel 2 //Measurement Variance for angular velocity (will need to be calculated for the imu)
-// You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
+#include "header.h"
+
+// Header files are used to ensure that the files can communicate with each other
 
 // Code to run at beginning
 #ifndef DATATEMPS
@@ -14,9 +12,9 @@ namespace dataTemps {//Temporary Variables to be used for data processing.
     extern Position position;
     extern Orientation formattedOrientation;
     
-    extern kFilter filterAccelX(MeasVarAccel,0);
-    extern kFilter filterAccelY(MeasVarAccel,0);
-    extern kFilter filterAccelZ(MeasVarAccel,0);
+    kFilter filterAccelX(MeasVarAccel,0);
+    kFilter filterAccelY(MeasVarAccel,0);
+    kFilter filterAccelZ(MeasVarAccel,0);
 }
 #endif
 void initDataHolders();//Adds inital data to temporary variables such as position and acceleration
@@ -25,4 +23,4 @@ void initDataHolders();//Adds inital data to temporary variables such as positio
 void filterData();//Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
 void calculateNewState();//Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
 void formatData();//Converts the orientation to decoupled Euler angles so it can be put in the global variables.
-void updateGlobalData();//Updates the global position and orientation with new data. 
+void updateGlobalData();//Updates the global position and orientation with new data.

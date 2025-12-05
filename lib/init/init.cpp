@@ -1,5 +1,7 @@
 #include "header.h"
-#include <RF24.h>
+
+#include "init.h"
+#include "sensors.h"
 // Name: Init (Initialization)
 // Description: Functions related to initializing systems
 // Devices: Servos, BME280 barometers, MPU6050 acceloremeter

@@ -1,4 +1,4 @@
-#include "header.h"
+#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
 //Class which allows for the filtering of raw input data.
 
 class kFilter{

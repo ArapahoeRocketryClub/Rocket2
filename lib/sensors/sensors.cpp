@@ -1,4 +1,5 @@
 #include "header.h"
+#include "sensors.h"
 
 // Name: DataCollection
 // Description: Functions related to the controlling motion (Example: servos for TVC, parachute deployment, etc)
@@ -32,8 +33,8 @@ int setReportsBno08x(){//Enables reports for specific types of data
 int checkBarometerForData(){
 
     float temperature = barometer.readTemperature(); //degrees Celsius
-    float humidity = barometer.readHumidity() // Relative humidity percentage
-    float pressure = barometer.readPressure() // Pascals
+    float humidity = barometer.readHumidity(); // Relative humidity percentage
+    float pressure = barometer.readPressure(); // Pascals
     
 }
 int checkImuForData(){
@@ -52,7 +53,7 @@ int checkImuForData(){
                 break;
             case SH2_ACCELEROMETER: //Checks if data in the sensor is acceleration data. 
                 //Updates global acceleration data with sensor data if it's available.
-                globalAcceleration.x = sensorValue.un.accelerometer.x     
+                globalAcceleration.x = sensorValue.un.accelerometer.x;
                 globalAcceleration.y = sensorValue.un.accelerometer.y;
                 globalAcceleration.z = sensorValue.un.accelerometer.z;
                 break;

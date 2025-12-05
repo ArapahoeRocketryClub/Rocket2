@@ -1,8 +1,10 @@
+#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
 #include "header.h"
+
+
 // The "global" file is like a community pile for data. It hosts our custom data types (vectors, usually in the form of structs)
 // This should be used for things used by more than a single file. All other variables should be contained within their file.
 
-#pragma once
 
 // Constants --- PINS ARE PLACEHOLDERS FOR NOW
 const int PIN_SERVO_X = 2;
@@ -12,9 +14,12 @@ const int PIN_LED = 420;
 
 const int RADIO_PIN_CE = 42069;
 const int RADIO_PIN_CSN = 777;
+
+const float MeasVarAccel = 2; //Measurement Variance for acceleration (will need to be calculated for the imu)
+const float MeasVarAngVel = 2; //Measurement Variance for angular velocity (will need to be calculated for the imu)
+
+
 uint8_t address[][6] = {"1Node", "2Node"}; // For radio
-
-
 
 struct Position
 {

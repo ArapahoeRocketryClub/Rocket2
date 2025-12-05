@@ -1,4 +1,4 @@
-#include "header.h"
+#include "termination.h"
 // Name: Termination
 // Description: Functions related to ending program safely.
 

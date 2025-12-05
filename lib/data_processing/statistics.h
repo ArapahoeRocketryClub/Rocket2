@@ -1,4 +1,5 @@
-#include "header.h"
+#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
+#include "global.h"
 // Collection of statistics functions which might be useful, especially for data
 
 //returns the square of the argument

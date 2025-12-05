@@ -1,4 +1,4 @@
-#include "header.h"
+#include "kalmanfilter.h"
 
 kFilter::kFilter(double measurementVar, double initialMeasurement){
     var = measurementVar;//Updates initial variance.

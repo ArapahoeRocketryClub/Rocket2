@@ -1,8 +1,10 @@
-#include "header.h"
+#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
+#include <Arduino.h>
+#include <Servo.h>
 #include <Adafruit_BNO08x.h>
+#include "global.h"
 
 // Header files are used to ensure that the files can communicate with each other
-#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
 
 

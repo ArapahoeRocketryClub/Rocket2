@@ -1,4 +1,5 @@
-#include "header.h"
+#include "data_processing.h"
+#include "sensors.h"
 // Name: DataProcessing
 // Description: Functions related to manipulating data received from sensors
 // Devices: N/A, just input from other code
