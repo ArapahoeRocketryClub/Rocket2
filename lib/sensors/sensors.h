@@ -26,9 +26,9 @@ double GetServoRotation(Servo servo){
 }
 
 int setReportsBno08x();//Tells the BNO08x what data to output needs to be updated every time sensor is reset.
-int checkImuForData();//Checks for new IMU data. If so, the fucntion returns 1 and stores the data in the global variables.
+int checkImuForData();//Checks for new IMU data. If so, the function returns 1 and stores the data in the global variables.
 int checkBarometerForData();//Gets new pressure data from barometer.
-QuaternionRotation GetOrientation();//Reutrns quaternion orientation.
+QuaternionRotation GetOrientation();//Returns quaternion orientation.
 Acceleration GetAcceleration(); // See global.h for Acceleration struct.
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct.
 void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure.

@@ -22,6 +22,11 @@ void initDataHolders(){
     dataTemps::position.y = 0;
     dataTemps::position.z = 0;
 
+    dataTemps::initalReferenceRotation.w = 0;
+    dataTemps::initalReferenceRotation.i = 0;
+    dataTemps::initalReferenceRotation.j = 0;
+    dataTemps::initalReferenceRotation.k = 0;
+
     dataTemps::formattedOrientation.x = 0;
     dataTemps::formattedOrientation.y = 0;
 };
@@ -38,3 +43,8 @@ void updateGlobalData(){
     globalPosition = dataTemps::position;//Updates global position variable
     globalOrientation = dataTemps::formattedOrientation;//Updates global orientation variable
 };
+
+void initialRotation(){
+    QuaternionRotation currentRotation = GetOrientation();
+    dataTemps::initalReferenceRotation = currentRotation;
+}
