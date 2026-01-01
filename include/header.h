@@ -1,5 +1,6 @@
-#pragma once
-
+// File: include/header.h
+// Description: Central include aggregator for common external libraries used across the project
+//
 // EXTERNAL LIBRARIES (Use <>)
 #include <Arduino.h>
 #include <Servo.h>
@@ -7,16 +8,7 @@
 #include <Adafruit_BME280.h>
 #include <RF24.h>
 
-// GLOBAL
+// INTERNAL
 #include "global.h"
-
-// SUBSYSTEMS (Use "")
 #include "kalmanfilter.h"
 #include "statistics.h"
-
-/*#include "data_processing.h"
-#include "communication.h"
-#include "control.h"
-#include "init.h"
-#include "termination.h"
-#include "sensors.h"*/

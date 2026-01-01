@@ -1,3 +1,6 @@
+// File: lib/data_processing/kalmanfilter.cpp
+// Description: Kalman filter implementation for scalar measurements
+// INTERNAL LIBRARIES (Use "")
 #include "kalmanfilter.h"
 
 kFilter::kFilter(double measurementVar, double initialMeasurement){

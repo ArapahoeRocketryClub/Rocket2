@@ -1,6 +1,10 @@
+// File: lib/data_processing/statistics.cpp
+// Description: Implementations for non-template statistics helpers
+// INTERNAL LIBRARIES (Use "")
 #include "statistics.h"
-//This is the source file for the statistics functions. 
-//The template functions must be declared and defined in the header. 
+
+// This is the source file for the statistics functions.
+// The template functions must be declared and defined in the header.
 
 QuaternionRotation quaternionMultiply(QuaternionRotation a, QuaternionRotation b){
     QuaternionRotation temp;

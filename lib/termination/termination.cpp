@@ -1,4 +1,9 @@
+// File: lib/termination/termination.cpp
+// Description: Implementations for termination and safe-shutdown routines
+
+// INTERNAL LIBRARIES (Use "")
 #include "termination.h"
+
 // Name: Termination
 // Description: Functions related to ending program safely.
 

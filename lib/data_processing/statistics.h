@@ -1,5 +1,11 @@
-#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
+// File: lib/data_processing/statistics.h
+// Description: Statistical helpers and quaternion utilities used by data processing
+// INTERNAL LIBRARIES (Use "")
+#ifndef GLOBALLIB
+#define GLOBALLIB
 #include "global.h"
+#endif
+
 // Collection of statistics functions which might be useful, especially for data
 
 //returns the square of the argument

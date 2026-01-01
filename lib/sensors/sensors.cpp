@@ -1,4 +1,3 @@
-#include "header.h"
 #include "sensors.h"
 
 // Name: DataCollection
@@ -37,6 +36,11 @@ int checkBarometerForData(){
     float pressure = barometer.readPressure(); // Pascals
     
 }
+
+double GetServoRotation(Servo servo){
+    return servo.read();
+}
+
 int checkImuForData(){
     if(bno08x.wasReset()){//Checks if the IMU was reset. If so, the reports are redone.
         setReportsBno08x();

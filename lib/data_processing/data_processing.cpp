@@ -1,5 +1,4 @@
 #include "data_processing.h"
-#include "sensors.h"
 // Name: DataProcessing
 // Description: Functions related to manipulating data received from sensors
 // Devices: N/A, just input from other code
@@ -47,4 +46,15 @@ void updateGlobalData(){
 void initialRotation(){
     QuaternionRotation currentRotation = GetOrientation();
     dataTemps::initalReferenceRotation = currentRotation;
+}
+
+AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
+    AngularPosition angles;
+    // Yaw (z-axis rotation)
+    angles.z = atan2(2.0 * (q.w * q.i + q.j * q.k), 1.0 - 2.0 * (q.i * q.i + q.j * q.j));
+    // Pitch (y-axis rotation)
+    angles.y = asin(2.0 * (q.w * q.j - q.k * q.i));
+    // Roll (x-axis rotation)
+    angles.x = atan2(2.0 * (q.w * q.k + q.i * q.j), 1.0 - 2.0 * (q.j * q.j + q.k * q.k));
+    return angles;
 }

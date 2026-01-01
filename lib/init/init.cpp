@@ -1,11 +1,12 @@
-#include "header.h"
-
+// File: lib/init/init.cpp
+// Description: Initialization routines for hardware and subsystems
+//
 #include "init.h"
-#include "sensors.h"
+
 // Name: Init (Initialization)
 // Description: Functions related to initializing systems
-// Devices: Servos, BME280 barometers, MPU6050 acceloremeter
-// Skills: Ability to implement documentation, safe coding habits (failure-tolerant code)
+// Devices: Servos, BME280 barometers, BNO085 IMU
+// Skills: Failure-tolerant init, hardware bring-up
 
 // Dibs: Jordan.T, Bora
 
@@ -37,7 +38,6 @@ int InitIMU() {
         ReportError("BNO085 IMU failed to Start!");
         return 0;//If the sensor doesn't connect then the function returns 0 and quits
     }
-
     setReportsBno08x(); //Tells the sensor what data to output.
     return 1; //Returns one if sensor connects
 };

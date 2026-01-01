@@ -1,5 +1,22 @@
-#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
-#include "header.h"
+// File: lib/communication/communication.h
+// Description: Radio and ground communication function prototypes
+// EXTERNAL LIBRARIES (Use <>)
+#ifndef ARDUINOLIB
+#define ARDUINOLIB
+#include <Arduino.h>
+#endif
+
+#ifndef RF24LIB
+#define RF24LIB
+#include <RF24.h>
+#endif
+
+// INTERNAL LIBRARIES (Use "")
+#ifndef GLOBALLIB
+#define GLOBALLIB
+#include "global.h"
+#endif
+
 
 // Header files are used to ensure that the files can communicate with each other
 

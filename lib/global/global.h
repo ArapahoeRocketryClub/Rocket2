@@ -1,23 +1,65 @@
-#pragma once  // Makes sure this file is included only once during compilation to avoid duplicates
-#include "header.h"
+// Makes sure this file is included only once during compilation to avoid duplicates
+// EXTERNAL LIBRARIES (Use <>)
+#define GLOBALLIB
 
+#ifndef ARDUINOLIB
+#define ARDUINOLIB
+#include <Arduino.h>
+#endif
+
+#ifndef BNO08XLIB
+#define BNO08XLIB
+#include <Adafruit_BNO08x.h>
+#endif
+
+#ifndef SERVOLIB
+#define SERVOLIB
+#include <Servo.h>
+#endif
+
+#ifndef RF24LIB
+#define RF24LIB
+#include <RF24.h>
+#endif
+
+#ifndef CONTROLLIB
+#define CONTROLLIB
+#include "control.h"
+#endif
 
 // The "global" file is like a community pile for data. It hosts our custom data types (vectors, usually in the form of structs)
 // This should be used for things used by more than a single file. All other variables should be contained within their file.
 
+// State machine magic
+
+int state = 0;
+enum STATE_MACHINE_STATES
+{                      // Corresponds to state = 0, 1, 2, ...
+    DISARMED = 0,      // No input, just activated
+    ARMED,             // "ARM" signal received from ground control
+    POWERED_ASCENT,    // Engine activated, flying up. Use TVC.
+    BALLISTIC_ASCENT,  // Engine burnout, still flying up. Stop using TVC.
+    BALLISTIC_DESCENT, // Descending below vertex, no parachute
+    PARACHUTE_DESCENT, // Descending with parachute
+    TOUCHDOWN,         // Pretty self explanatory
+    num_states         // 7, if nothing changes
+};
 
 // Constants --- PINS ARE PLACEHOLDERS FOR NOW
-const int PIN_SERVO_X = 2;
-const int PIN_SERVO_Y = 42;
+const int PIN_SERVO_X = -1;
+const int PIN_SERVO_Y = -1;
 
-const int PIN_LED = 420;
+const int PIN_LED = -1;
 
-const int RADIO_PIN_CE = 42069;
-const int RADIO_PIN_CSN = 777;
+const int RADIO_PIN_CE = -1;
+const int RADIO_PIN_CSN = -1;
 
-const float MeasVarAccel = 2; //Measurement Variance for acceleration (will need to be calculated for the imu)
-const float MeasVarAngVel = 2; //Measurement Variance for angular velocity (will need to be calculated for the imu)
+const int pGain = 1;
+const int iGain = 1;
+const int dGain = 1;
 
+const float MeasVarAccel = 2;  // Measurement Variance for acceleration (will need to be calculated for the imu)
+const float MeasVarAngVel = 2; // Measurement Variance for angular velocity (will need to be calculated for the imu)
 
 uint8_t address[][6] = {"1Node", "2Node"}; // For radio
 
@@ -59,6 +101,8 @@ struct AngularVelocity
     double z; // z angular velocity in !RADIANS/SECOND!
 };
 
+typedef struct AngularVelocity AngularPosition;
+
 void ReportError(String error); // Publishes an error by sending it over radio and enabling led
 
 extern Position globalPosition;
@@ -71,5 +115,5 @@ extern float Humidity;
 extern float Pressure;
 extern Servo ServoX;
 extern Servo ServoY;
+extern RF24 radio;
 extern Adafruit_BNO08x bno08x; // This is the IMU sensor object.
-RF24 radio(RADIO_PIN_CE, RADIO_PIN_CSN);
