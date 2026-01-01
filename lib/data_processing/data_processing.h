@@ -18,6 +18,11 @@
 #include "statistics.h"
 #endif
 
+#ifndef SENSORSLIB
+#define SENSORSLIB
+#include "sensors.h"
+#endif
+
 // Header files are used to ensure that the files can communicate with each other
 
 // Code to run at beginning
@@ -44,4 +49,4 @@ void formatData();//Converts the orientation to decoupled Euler angles so it can
 void updateGlobalData();//Updates the global position and orientation with new data.
 void initialRotation();//Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
 AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
-Orientaion eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
+Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
