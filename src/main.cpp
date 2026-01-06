@@ -31,7 +31,9 @@ void StateMachine()
         // Function
 
         // Transition
-
+        if (ARM_STATUS) {
+            state = ARMED;
+        }
         break;
     case ARMED:
         // Function

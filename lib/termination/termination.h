@@ -2,6 +2,10 @@
 // Description: Termination and safe-shutdown function prototypes
 
 // EXTERNAL LIBRARIES (Use <>)
+#ifndef TERMINATIONLIB
+#define TERMINATIONLIB
+#endif
+
 #ifndef ARDUINOLIB
 #define ARDUINOLIB
 #include <Arduino.h>

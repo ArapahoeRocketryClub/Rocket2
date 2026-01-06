@@ -3,6 +3,13 @@
 //
 #include "global.h"
 
+int state = 0;
+bool ARM_STATUS = false;
+uint8_t address[][6] = {"1Node", "2Node"}; // For radio
+
+Servo ServoX;
+Servo ServoY;
+
 Position globalPosition;
 Acceleration globalAcceleration;
 Orientation globalOrientation;
@@ -13,7 +20,7 @@ void ReportError(String error) // Publishes an error by sending it over radio an
 {
     Serial.print(F("!ERROR!: "));
     Serial.println(error);
-    SetLight(true, PIN_LED);
+    //SetLight(true, PIN_LED);
 }
 
 RF24 radio(RADIO_PIN_CE, RADIO_PIN_CSN);

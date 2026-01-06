@@ -1,10 +1,11 @@
 // File: lib/data_processing/statistics.h
 // Description: Statistical helpers and quaternion utilities used by data processing
+
+#ifndef STATISTICSLIB
+#define STATISTICSLIB
+
 // INTERNAL LIBRARIES (Use "")
-#ifndef GLOBALLIB
-#define GLOBALLIB
 #include "global.h"
-#endif
 
 // Collection of statistics functions which might be useful, especially for data
 
@@ -46,3 +47,5 @@ template <typename type> type sampVar(type* currentVal, int numTerms){
 };
 
 QuaternionRotation quaternionMultiply(QuaternionRotation, QuaternionRotation);//<ultiplies two quternions using Hamiltonian product. This is useful for handling rotation data.
+
+#endif

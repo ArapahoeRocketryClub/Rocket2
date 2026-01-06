@@ -1,6 +1,10 @@
 // File: lib/communication/communication.h
 // Description: Radio and ground communication function prototypes
 // EXTERNAL LIBRARIES (Use <>)
+#ifndef COMMUNICATIONLIB
+#define COMMUNICATIONLIB
+#endif
+
 #ifndef ARDUINOLIB
 #define ARDUINOLIB
 #include <Arduino.h>

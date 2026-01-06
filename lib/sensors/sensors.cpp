@@ -34,7 +34,7 @@ int checkBarometerForData(){
     float temperature = barometer.readTemperature(); //degrees Celsius
     float humidity = barometer.readHumidity(); // Relative humidity percentage
     float pressure = barometer.readPressure(); // Pascals
-    
+    return 0;
 }
 
 double GetServoRotation(Servo servo){
@@ -63,6 +63,7 @@ int checkImuForData(){
                 break;
         }
     }
+    return 1;
 }
 QuaternionRotation GetOrientation(){
     return globalQuaternionOrientation;

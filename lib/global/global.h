@@ -1,10 +1,16 @@
 // Makes sure this file is included only once during compilation to avoid duplicates
-// EXTERNAL LIBRARIES (Use <>)
+#ifndef GLOBALLIB
 #define GLOBALLIB
 
+// EXTERNAL LIBRARIES (Use <>)
 #ifndef ARDUINOLIB
 #define ARDUINOLIB
 #include <Arduino.h>
+#endif
+
+#ifndef RF24LIB
+#define RF24LIB
+#include <RF24.h>
 #endif
 
 #ifndef BNO08XLIB
@@ -17,22 +23,14 @@
 #include <Servo.h>
 #endif
 
-#ifndef RF24LIB
-#define RF24LIB
-#include <RF24.h>
-#endif
-
-#ifndef CONTROLLIB
-#define CONTROLLIB
-#include "control.h"
-#endif
-
+// INTERNAL LIBRARIES (Use "")
 // The "global" file is like a community pile for data. It hosts our custom data types (vectors, usually in the form of structs)
 // This should be used for things used by more than a single file. All other variables should be contained within their file.
 
 // State machine magic
 
-int state = 0;
+extern int state;
+extern bool ARM_STATUS;
 enum STATE_MACHINE_STATES
 {                      // Corresponds to state = 0, 1, 2, ...
     DISARMED = 0,      // No input, just activated
@@ -46,6 +44,7 @@ enum STATE_MACHINE_STATES
 };
 
 // Constants --- PINS ARE PLACEHOLDERS FOR NOW
+
 const int PIN_SERVO_X = -1;
 const int PIN_SERVO_Y = -1;
 
@@ -54,14 +53,16 @@ const int PIN_LED = -1;
 const int RADIO_PIN_CE = -1;
 const int RADIO_PIN_CSN = -1;
 
-const int pGain = 1;
-const int iGain = 1;
-const int dGain = 1;
+const double pGain = 1;
+const double iGain = 1;
+const double dGain = 1;
+
+const double LAUNCH_ACCELERATION_THRESHOLD = 5.0;
 
 const float MeasVarAccel = 2;  // Measurement Variance for acceleration (will need to be calculated for the imu)
 const float MeasVarAngVel = 2; // Measurement Variance for angular velocity (will need to be calculated for the imu)
 
-uint8_t address[][6] = {"1Node", "2Node"}; // For radio
+extern uint8_t address[][6]; // For radio
 
 struct Position
 {
@@ -117,3 +118,4 @@ extern Servo ServoX;
 extern Servo ServoY;
 extern RF24 radio;
 extern Adafruit_BNO08x bno08x; // This is the IMU sensor object.
+#endif

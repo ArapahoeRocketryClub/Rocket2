@@ -1,31 +1,17 @@
 // File: lib/init/init.h
 // Description: Initialization function prototypes for subsystems
 
+#ifndef INITLIB
+#define INITLIB
+
 // EXTERNAL LIBRARIES (Use <>)
-#ifndef ARDUINOLIB
-#define ARDUINOLIB
 #include <Arduino.h>
-#endif
-
-#ifndef GLOBALLIB
-#define GLOBALLIB
-#include "global.h"
-#endif
-
-#ifndef RF24LIB
-#define RF24LIB
 #include <RF24.h>
-#endif
-
-#ifndef SENSORSLIB
-#define SENSORSLIB
-#include "sensors.h"
-#endif
-
-#ifndef BNO08XLIB
-#define BNO08XLIB
 #include <Adafruit_BNO08x.h>
-#endif
+
+// INTERNAL LIBRARIES (Use "")
+#include "global.h"
+#include "sensors.h"
 
 // Header files are used to ensure that the files can communicate with each other
 
@@ -38,3 +24,4 @@ void TestSystems(); // Blink LED, move TVC mount within range of motion to see i
 void InitServo();
 void InitLED();
 void InitSerialPort();
+#endif

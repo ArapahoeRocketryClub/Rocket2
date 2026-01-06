@@ -2,25 +2,18 @@
 // Description: Control helper prototypes for servos and GPIOs
 //
 
-// EXTERNAL LIBRARIES (Use <>)
+#ifndef CONTROLLIB
 #define CONTROLLIB
 
-#ifndef ARDUINOLIB
-#define ARDUINOLIB
+// EXTERNAL LIBRARIES (Use <>)
 #include <Arduino.h>
-#endif
-
-#ifndef SERVOLIB
-#define SERVOLIB
 #include <Servo.h>
-#endif
+#include <Adafruit_BNO08x.h>
 
 // INTERNAL LIBRARIES (Use "")
-#ifndef GLOBALLIB
-#define GLOBALLIB
 #include "global.h"
-#endif
-
 
 void SetLight(bool state, int pin); // Sets the LED on given to the state (on/off)
 void MoveServo(Servo servo, double angle); // Moves the specified servo to an !RADIANS! (not degrees)
+
+#endif#endif

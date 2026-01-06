@@ -2,26 +2,14 @@
 // Description: Data processing prototypes and temporary data holders (filters, quaternion->euler conversions)
 //
 
+#ifndef DATAPROCESSINGLIB
+#define DATAPROCESSINGLIB
+
 // INTERNAL LIBRARIES (Use "")
-#ifndef GLOBALLIB
-#define GLOBALLIB
 #include "global.h"
-#endif
-
-#ifndef KALMANFILTERLIB
-#define KALMANFILTERLIB
 #include "kalmanfilter.h"
-#endif
-
-#ifndef STATISTICSLIB
-#define STATISTICSLIB
 #include "statistics.h"
-#endif
-
-#ifndef SENSORSLIB
-#define SENSORSLIB
 #include "sensors.h"
-#endif
 
 // Header files are used to ensure that the files can communicate with each other
 
@@ -50,3 +38,5 @@ void updateGlobalData();//Updates the global position and orientation with new d
 void initialRotation();//Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
 AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
 Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
+
+#endif

@@ -1,33 +1,17 @@
 // File: lib/sensors/sensors.h
 // Description: Sensor interface prototypes for IMU, barometer and related helpers
-// EXTERNAL LIBRARIES (Use <>)
+
+#ifndef SENSORSLIB
 #define SENSORSLIB
 
-#ifndef ARDUINOLIB
-#define ARDUINOLIB
+// EXTERNAL LIBRARIES (Use <>)
 #include <Arduino.h>
-#endif
-
-#ifndef SERVOLIB
-#define SERVOLIB
 #include <Servo.h>
-#endif
-
-#ifndef BNO08XLIB
-#define BNO08XLIB
 #include <Adafruit_BNO08x.h>
-#endif
-
-#ifndef BME280LIB
-#define BME280LIB
 #include <Adafruit_BME280.h>
-#endif
 
 // INTERNAL LIBRARIES (Use "")
-#ifndef GLOBALLIB
-#define GLOBALLIB
 #include "global.h"
-#endif
 
 // Header files are used to ensure that the files can communicate with each other
 // You can define different functions here. They don't have to have ANY code just yet, just the return type and inputs
@@ -54,3 +38,5 @@ QuaternionRotation GetOrientation();//Returns quaternion orientation.
 Acceleration GetAcceleration(); // See global.h for Acceleration struct.
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct.
 void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure.
+
+#endif
