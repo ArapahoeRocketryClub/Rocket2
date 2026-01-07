@@ -14,6 +14,9 @@
 #include "statistics.h"
 #include "sensors.h"
 #include "init.h"
+#include "control.h"
+#include "termination.h"
+#include "pid.h"
 
 void setup()
 {
@@ -21,6 +24,12 @@ void setup()
     Serial.println(F("Arduino is now online!"));
     InitIMU();
     InitServo();
+}
+
+void ControlThrustVector()
+{
+    ServoX.write(outputSignalCalc(xIntegral, xDerivative, GetOrientation().i, pGain, iGain, dGain));
+    ServoY.write(outputSignalCalc(yIntegral, yDerivative, GetOrientation().j, pGain, iGain, dGain));
 }
 
 void StateMachine()
@@ -31,7 +40,8 @@ void StateMachine()
         // Function
 
         // Transition
-        if (ARM_STATUS) {
+        if (ARM_STATUS)
+        {
             state = ARMED;
         }
         break;
@@ -43,7 +53,7 @@ void StateMachine()
         break;
     case POWERED_ASCENT:
         // Function
-
+        ControlThrustVector();
         // Transition
 
         break;

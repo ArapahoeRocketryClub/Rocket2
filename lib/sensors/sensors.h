@@ -30,13 +30,16 @@ BME280
 * Altitude above ground
 */
 
+extern Adafruit_BME280 barometer;
+extern Adafruit_BNO08x bno08x;
+
 double GetServoRotation(Servo servo);
 int setReportsBno08x();//Tells the BNO08x what data to output needs to be updated every time sensor is reset.
 int checkImuForData();//Checks for new IMU data. If so, the function returns 1 and stores the data in the global variables.
-int checkBarometerForData();//Gets new pressure data from barometer.
 QuaternionRotation GetOrientation();//Returns quaternion orientation.
 Acceleration GetAcceleration(); // See global.h for Acceleration struct.
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct.
 void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure.
+float GetAltitude(); // Returns altitude from barometer
 
 #endif

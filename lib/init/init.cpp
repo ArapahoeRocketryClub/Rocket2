@@ -48,6 +48,11 @@ void InitSerialPort(){
     Wire.begin();//Begins I2C protocol with the sensor.
 };
 
-
+void InitBarometer() {
+    if (!barometer.begin()) {
+    ReportError("BME fail");
+    while (1);
+  }
+}
 
 

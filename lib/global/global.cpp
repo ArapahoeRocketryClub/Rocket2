@@ -5,6 +5,15 @@
 
 int state = 0;
 bool ARM_STATUS = false;
+
+double xIntegral = 0.0;
+double xDerivative = 0.0;
+double yIntegral = 0.0;
+double yDerivative = 0.0;
+
+
+double reference_pressure = 1010.8; // Typical air pressure, in HPa, for Denver
+
 uint8_t address[][6] = {"1Node", "2Node"}; // For radio
 
 Servo ServoX;

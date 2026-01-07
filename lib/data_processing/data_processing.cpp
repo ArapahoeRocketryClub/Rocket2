@@ -51,10 +51,10 @@ void initialRotation(){
 AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
     AngularPosition angles;
     // Yaw (z-axis rotation)
-    angles.z = atan2(2.0 * (q.w * q.i + q.j * q.k), 1.0 - 2.0 * (q.i * q.i + q.j * q.j));
+    angles.z = atan2(2.0 * (q.w * q.j - q.i * q.k), 1.0 - 2.0 * (q.j * q.j + q.k * q.k));
     // Pitch (y-axis rotation)
-    angles.y = asin(2.0 * (q.w * q.j - q.k * q.i));
+    angles.y = asin(2.0 * (q.i * q.j + q.k * q.w));
     // Roll (x-axis rotation)
-    angles.x = atan2(2.0 * (q.w * q.k + q.i * q.j), 1.0 - 2.0 * (q.j * q.j + q.k * q.k));
+    angles.x = atan2(2.0 * (q.i * q.w - q.k * q.j), 1.0 - 2.0 * (q.i * q.i + q.k * q.k));
     return angles;
 }

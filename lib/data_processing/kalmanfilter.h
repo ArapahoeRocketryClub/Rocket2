@@ -1,6 +1,8 @@
 // File: lib/data_processing/kalmanfilter.h
 // Description: Simple Kalman-filter-like class for scalar measurements
 
+#ifndef KALMANFILTERLIB
+#define KALMANFILTERLIB
 
 //Class which allows for the filtering of raw input data.
 class kFilter{
@@ -15,3 +17,5 @@ class kFilter{
         double rEstimate() const;//Reads the estimate
         double rVar() const;//Reads the variance
 };
+
+#endif

@@ -30,7 +30,15 @@
 // State machine magic
 
 extern int state;
+extern double reference_pressure;
 extern bool ARM_STATUS;
+
+extern double xIntegral;
+extern double xDerivative;
+extern double yIntegral;
+extern double yDerivative;
+
+
 enum STATE_MACHINE_STATES
 {                      // Corresponds to state = 0, 1, 2, ...
     DISARMED = 0,      // No input, just activated
