@@ -83,3 +83,8 @@ void ResetBarometer()
 {
     reference_pressure = barometer.readPressure();
 }
+
+Orientation GetDecoupledOrientation(){
+    Orientation tempOrientation = globalOrientation;
+    return tempOrientation;
+}

@@ -39,6 +39,7 @@ int checkImuForData();//Checks for new IMU data. If so, the function returns 1 a
 QuaternionRotation GetOrientation();//Returns quaternion orientation.
 Acceleration GetAcceleration(); // See global.h for Acceleration struct.
 AngularVelocity GetAngularVelocity(); // See global.h for AngularVelocity struct.
+Orientation GetDecoupledOrientation();
 void ResetBarometer(); // Sets current altitude to 0m height by setting reference air pressure to current air pressure.
 float GetAltitude(); // Returns altitude from barometer
 

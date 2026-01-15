@@ -38,48 +38,53 @@ void StateMachine()
     {
     case DISARMED:
         // Function
+        
+        //EMPTY FOR DISARMED
 
         // Transition
-        if (ARM_STATUS)
+        if (ARM_STATUS == true)
         {
             state = ARMED;
         }
         break;
     case ARMED:
         // Function
-
+        ResetBarometer();
         // Transition
-
+        
         break;
     case POWERED_ASCENT:
         // Function
         ControlThrustVector();
         // Transition
-
+        if()
         break;
     case BALLISTIC_ASCENT:
         // Function
-
+            //stop ControlThrustVector()
+            
         // Transition
-
+                //if not go up then go to BALLISTIC_DESCENT
+        
         break;
     case BALLISTIC_DESCENT:
         // Function
-
+            
         // Transition
-
+            //if descent delta is greater then x then go to PARACHUTE_DESCENT
+            //or if less then x alt.
         break;
     case PARACHUTE_DESCENT:
         // Function
 
         // Transition
-
+        // when velocity is a very small value, the rocket has touched down
+        if(GetAltitude() <= 5 || GetAcceleration() < 0.2f){
+            state = TOUCHDOWN;
+        }
         break;
     case TOUCHDOWN:
         // Function
-
-        // Transition
-
         break;
 
     default:
