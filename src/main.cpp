@@ -18,18 +18,23 @@
 #include "termination.h"
 #include "pid.h"
 
+pid pidServoX;
+pid pidServoY;
+
 void setup()
 {
     InitSerialPort();
     Serial.println(F("Arduino is now online!"));
     InitIMU();
     InitServo();
+    pidServoX = pid(1, 1, 1); // FIXME: Tune PID values
+    pidServoY = pid(1, 1, 1); // FIXME: Tune PID values
 }
 
 void ControlThrustVector()
 {
-    ServoX.write(outputSignalCalc(xIntegral, xDerivative, GetOrientation().i, pGain, iGain, dGain));
-    ServoY.write(outputSignalCalc(yIntegral, yDerivative, GetOrientation().j, pGain, iGain, dGain));
+    ServoX.write(pidServoX.compute(GetOrientation().i, 0)); //FIXME: Verify
+    ServoY.write(pidServoY.compute(GetOrientation().j, 0)); //FIXME: Verify
 }
 
 void StateMachine()
