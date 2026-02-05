@@ -46,6 +46,8 @@ template <typename type> type sampVar(type* currentVal, int numTerms){
     return partialSquareSum / static_cast<type>(numTerms - 1);
 };
 
-QuaternionRotation quaternionMultiply(QuaternionRotation, QuaternionRotation);//<ultiplies two quternions using Hamiltonian product. This is useful for handling rotation data.
-
+QuaternionRotation quaternionMultiply(QuaternionRotation, QuaternionRotation);//multiplies two quternions using Hamiltonian product. This is useful for handling rotation data.
+QuaternionRotation quaternionInverse(QuaternionRotation);//Returns the inverse of a quaternion.
+double quaternionNormSquared(QuaternionRotation);//Returns the norm squared of a quaternion. (q1^2 + q2^2 + q3^2 + q4^2)
+QuaternionRotation quaternionConjugate(QuaternionRotation);//Returns the conjugate of a quaternion. q* = (q0, -q1, -q2, -q3)
 #endif

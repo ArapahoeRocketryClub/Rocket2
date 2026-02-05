@@ -14,3 +14,27 @@ QuaternionRotation quaternionMultiply(QuaternionRotation a, QuaternionRotation b
     temp.k = (a.w)*(b.k) + (a.i)*(b.j) - (a.j)*(b.i) + (a.k)*(b.w);
     return temp;
 }
+
+QuaternionRotation quaternionInverse(QuaternionRotation q){
+    QuaternionRotation temp;
+    double normSquared = quaternionNormSquared(q);
+    temp = quaternionConjugate(q);
+    temp.w /= normSquared;
+    temp.i /= normSquared;
+    temp.j /= normSquared;
+    temp.k /= normSquared;
+    return temp;
+}
+
+QuaternionRotation quaternionConjugate(QuaternionRotation q){
+    QuaternionRotation temp;
+    temp.w = q.w;
+    temp.i = -q.i;
+    temp.j = -q.j;
+    temp.k = -q.k;
+    return temp;
+}
+
+double quaternionNormSquared(QuaternionRotation q){
+    return (square <double> (q.w) + square <double> (q.i) + square <double> (q.j) + square <double> (q.k));
+}
