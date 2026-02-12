@@ -47,7 +47,7 @@ void initialRotation(){
     QuaternionRotation currentRotation = GetOrientation();
     dataTemps::initalReferenceRotation = currentRotation;
 }
-
+/*
 AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
     AngularPosition angles;
     // Yaw (z-axis rotation)
@@ -58,3 +58,4 @@ AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
     angles.x = atan2(2.0 * (q.i * q.w - q.k * q.j), 1.0 - 2.0 * (q.i * q.i + q.k * q.k));
     return angles;
 }
+*/

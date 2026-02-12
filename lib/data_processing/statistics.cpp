@@ -38,3 +38,27 @@ QuaternionRotation quaternionConjugate(QuaternionRotation q){
 double quaternionNormSquared(QuaternionRotation q){
     return (square <double> (q.w) + square <double> (q.i) + square <double> (q.j) + square <double> (q.k));
 }
+
+QuaternionRotation normQuaternion(QuaternionRotation rotation){
+    QuaternionRotation tempQuaternion;
+    double magnitude = sqrt(quaternionNormSquared(rotation));
+    tempQuaternion.w = rotation.w/magnitude;
+    tempQuaternion.i = rotation.i/magnitude;
+    tempQuaternion.j = rotation.j/magnitude;
+    tempQuaternion.k = rotation.k/magnitude;
+    return tempQuaternion;
+}
+
+QuaternionRotation swingTwistDecompositionPartial(Position axis, QuaternionRotation rotation){
+    QuaternionRotation projection;
+    projection.w = rotation.w;
+
+    double componentScalar;
+    componentScalar = (axis.x * rotation.i) + (axis.y * rotation.j) + (axis.z * rotation.k);
+    componentScalar /= (square<double>(axis.x) + square<double>(axis.y) + square<double>(axis.z));
+    projection.i = axis.x * componentScalar;
+    projection.j = axis.y * componentScalar;
+    projection.k = axis.z * componentScalar;
+
+    return projection;
+}

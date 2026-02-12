@@ -36,7 +36,8 @@ void calculateNewState();//Uses the filtered angular velocity to calculate new o
 void formatData();//Converts the orientation to decoupled Euler angles so it can be put in the global variables.
 void updateGlobalData();//Updates the global position and orientation with new data.
 void initialRotation();//Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
-AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
-Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
+//AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
+//Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
+
 
 #endif
