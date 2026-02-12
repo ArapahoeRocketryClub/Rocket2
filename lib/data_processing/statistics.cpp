@@ -65,11 +65,23 @@ QuaternionRotation swingTwistDecompositionPartialT(Position axis, QuaternionRota
 
 QuaternionRotation swingTwistDecompositionPartialS(QuaternionRotation twist,QuaternionRotation rotation){
     QuaternionRotation inverseTwist;
-    inverseTwist = quaternionConjugate(twist);
-    double magSquaredTwist = quaternionNormSquared(twist);
-    inverseTwist.w /= magSquaredTwist;
-    inverseTwist.i /= magSquaredTwist;
-    inverseTwist.j /= magSquaredTwist;
-    inverseTwist.k /= magSquaredTwist;
+    inverseTwist = quaternionInverse(rotation);
     return quaternionMultiply(rotation,inverseTwist);
+}
+
+Position rotateVecQuaternion(Position vec, QuaternionRotation rotation){
+    QuaternionRotation tempQuaternion;
+    tempQuaternion.w = 0;
+    tempQuaternion.i = vec.x;
+    tempQuaternion.j = vec.y;
+    tempQuaternion.k = vec.z;
+
+    tempQuaternion = quaternionMultiply(tempQuaternion,quaternionConjugate(rotation));
+    tempQuaternion = quaternionMultiply(rotation,tempQuaternion);
+
+    vec.x = tempQuaternion.i;
+    vec.y = tempQuaternion.j;
+    vec.z = tempQuaternion.k;
+
+    return vec;
 }

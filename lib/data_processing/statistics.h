@@ -53,4 +53,5 @@ QuaternionRotation quaternionConjugate(QuaternionRotation);//Returns the conjuga
 QuaternionRotation swingTwistDecompositionPartialT(Position axis,QuaternionRotation rotation);//Returns twist part of quaternion rotation
 QuaternionRotation swingTwistDecompositionPartialS(QuaternionRotation twist,QuaternionRotation rotation);//Returns swing part of quaternion rotation
 QuaternionRotation normQuaternion(QuaternionRotation rotation);
+Position rotateVecQuaternion(Position vec, QuaternionRotation rotation);//Applies quaternion rotation operation to vector. ijk 3 vec of (q * v * conj(q)).
 #endif

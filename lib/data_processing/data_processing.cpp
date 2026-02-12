@@ -12,7 +12,7 @@ void initDataHolders(){
     dataTemps::accel.y = 0;
     dataTemps::accel.z = 0;
 
-    dataTemps::angPos.w = 0;
+    dataTemps::angPos.w = 1;
     dataTemps::angPos.i = 0;
     dataTemps::angPos.j = 0;
     dataTemps::angPos.k = 0;
@@ -21,7 +21,7 @@ void initDataHolders(){
     dataTemps::position.y = 0;
     dataTemps::position.z = 0;
 
-    dataTemps::initalReferenceRotation.w = 0;
+    dataTemps::initalReferenceRotation.w = 1;
     dataTemps::initalReferenceRotation.i = 0;
     dataTemps::initalReferenceRotation.j = 0;
     dataTemps::initalReferenceRotation.k = 0;
@@ -49,11 +49,37 @@ void initialRotation(){
 }
 
 void updateLocalData(){
-    
+    dataTemps::angPos = GetOrientation();
+    //Update translational accel here
 }
 
 void calculateNewState(){
-    GetOrientation();
+    QuaternionRotation rotateInitToCurrent;//Quaternion orientation relative to init quaternion orientation.
+    QuaternionRotation twist;//Quaternion rotation about servo 1 axis.
+    QuaternionRotation swing;//Quaternion rotation about servo 2 axis.
+    rotateInitToCurrent = quaternionMultiply(dataTemps::angPos,quaternionInverse(dataTemps::initalReferenceRotation));
+
+    Position servo1Axis;
+    servo1Axis.x = SERVOAXISX1;
+    servo1Axis.y = SERVOAXISY1;
+    servo1Axis.z = SERVOAXISZ1;
+    servo1Axis = rotateVecQuaternion(servo1Axis,rotateInitToCurrent);//Transform axis of servo 1 so that is relative to world.
+    
+    Position servo2Axis;
+    servo2Axis.x = SERVOAXISX2;
+    servo2Axis.y = SERVOAXISY2;
+    servo2Axis.z = SERVOAXISZ2;
+    servo2Axis = rotateVecQuaternion(servo2Axis,rotateInitToCurrent);//Transform axis of servo 2 so that is relative to world.
+
+    twist = swingTwistDecompositionPartialT(servo1Axis,rotateInitToCurrent);//Take component of rocket's orientation about the servo 1 axis.
+    swing = swingTwistDecompositionPartialS(twist,rotateInitToCurrent);//Remainder rotation of the orientation.
+
+    twist = normQuaternion(twist);//Normalize quaternion.
+    swing = swingTwistDecompositionPartialT(servo2Axis,swing);//Take component of rocket's remainder orientation about the servo 2 axis.
+    swing = normQuaternion(swing);//Normalize quaternion.
+
+    dataTemps::formattedOrientation.x = 2 * acos(twist.w);//Angle of the quaternion rotation
+    dataTemps::formattedOrientation.y = 2 * acos(swing.w);//Angle of the quaternion rotation
 }
 /*
 AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){

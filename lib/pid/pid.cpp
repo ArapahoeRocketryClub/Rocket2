@@ -58,3 +58,13 @@ float pid::compute(float input, float target)
     prevTime = now;
     return kP * error + kI * integralVal + kD * derivativeVal;
 }
+
+pid::pid(float KP, float KI, float KD)
+{
+    kP = KP;
+    kI = KI;
+    kD = KD;
+    error = 0;
+    prevError = 0;
+    integralVal = 0;
+}

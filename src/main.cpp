@@ -18,8 +18,8 @@
 #include "termination.h"
 #include "pid.h"
 
-pid pidServoX;
-pid pidServoY;
+pid pidServoX(1, 1, 1); // FIXME: Tune PID values
+pid pidServoY(1, 1, 1); // FIXME: Tune PID values
 
 void setup()
 {
@@ -27,8 +27,6 @@ void setup()
     Serial.println(F("Arduino is now online!"));
     InitIMU();
     InitServo();
-    pidServoX = pid(1, 1, 1); // FIXME: Tune PID values
-    pidServoY = pid(1, 1, 1); // FIXME: Tune PID values
 }
 
 void ControlThrustVector()
@@ -62,7 +60,7 @@ void StateMachine()
         // Function
         ControlThrustVector();
         // Transition
-        if()
+        //if()
         break;
     case BALLISTIC_ASCENT:
         // Function
@@ -84,7 +82,7 @@ void StateMachine()
 
         // Transition
         // when velocity is a very small value, the rocket has touched down
-        if(GetAltitude() <= 5 || GetAcceleration() < 0.2f){
+        if(GetAltitude() <= 5 || GetAcceleration().x < 0.2f){
             state = TOUCHDOWN;
         }
         break;

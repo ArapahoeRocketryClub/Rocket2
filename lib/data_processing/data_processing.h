@@ -17,8 +17,8 @@
 #ifndef DATATMPSLIB
 #define DATATMPSLIB
 namespace dataTemps {//Temporary Variables to be used for data processing.
-    extern Acceleration accel;//Stores filtered acceleration data.
-    extern QuaternionRotation angPos;//Stores filtered angular velocity data.
+    extern Acceleration accel;//Stores acceleration data.
+    extern QuaternionRotation angPos;//Stores angular data.
     extern Position position;
     extern Orientation formattedOrientation;
     extern QuaternionRotation initalReferenceRotation;//Stores the initial orientation of the rocket to be used as a reference point.
@@ -37,6 +37,7 @@ namespace dataTemps {//Temporary Variables to be used for data processing.
 #define SERVOAXISX2 1
 #define SERVOAXISY2 0
 #define SERVOAXISZ2 0
+
 #endif
 void initDataHolders();//Adds inital data to temporary variables such as position and acceleration
 
