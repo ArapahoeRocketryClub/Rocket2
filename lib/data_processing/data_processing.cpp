@@ -47,6 +47,14 @@ void initialRotation(){
     QuaternionRotation currentRotation = GetOrientation();
     dataTemps::initalReferenceRotation = currentRotation;
 }
+
+void updateLocalData(){
+    
+}
+
+void calculateNewState(){
+    GetOrientation();
+}
 /*
 AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
     AngularPosition angles;

@@ -27,6 +27,16 @@ namespace dataTemps {//Temporary Variables to be used for data processing.
     kFilter filterAccelY(MeasVarAccel,0);
     kFilter filterAccelZ(MeasVarAccel,0);
 }
+
+
+//Numbers defining the axis that the servo can rotate the the rocket around (0,0,1) is in direction of nose.
+#define SERVOAXISX1 0
+#define SERVOAXISY1 1
+#define SERVOAXISZ1 0
+
+#define SERVOAXISX2 1
+#define SERVOAXISY2 0
+#define SERVOAXISZ2 0
 #endif
 void initDataHolders();//Adds inital data to temporary variables such as position and acceleration
 
@@ -35,6 +45,7 @@ void filterData();//Takes data from sensors and uses the Kalman filter to improc
 void calculateNewState();//Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
 void formatData();//Converts the orientation to decoupled Euler angles so it can be put in the global variables.
 void updateGlobalData();//Updates the global position and orientation with new data.
+void updateLocalData();//Takes sensors and store it into dataTemps.
 void initialRotation();//Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
 //AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
 //Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.

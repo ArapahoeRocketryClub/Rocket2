@@ -49,7 +49,7 @@ QuaternionRotation normQuaternion(QuaternionRotation rotation){
     return tempQuaternion;
 }
 
-QuaternionRotation swingTwistDecompositionPartial(Position axis, QuaternionRotation rotation){
+QuaternionRotation swingTwistDecompositionPartialT(Position axis, QuaternionRotation rotation){
     QuaternionRotation projection;
     projection.w = rotation.w;
 
@@ -61,4 +61,15 @@ QuaternionRotation swingTwistDecompositionPartial(Position axis, QuaternionRotat
     projection.k = axis.z * componentScalar;
 
     return projection;
+}
+
+QuaternionRotation swingTwistDecompositionPartialS(QuaternionRotation twist,QuaternionRotation rotation){
+    QuaternionRotation inverseTwist;
+    inverseTwist = quaternionConjugate(twist);
+    double magSquaredTwist = quaternionNormSquared(twist);
+    inverseTwist.w /= magSquaredTwist;
+    inverseTwist.i /= magSquaredTwist;
+    inverseTwist.j /= magSquaredTwist;
+    inverseTwist.k /= magSquaredTwist;
+    return quaternionMultiply(rotation,inverseTwist);
 }
