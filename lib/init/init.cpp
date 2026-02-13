@@ -5,7 +5,7 @@
 
 // Name: Init (Initialization)
 // Description: Functions related to initializing systems
-// Devices: Servos, BME280 barometers, BNO085 IMU
+// Devices: Servos, BMP280 barometers, BNO085 IMU
 // Skills: Failure-tolerant init, hardware bring-up
 
 // Dibs: Jordan.T, Bora
@@ -31,11 +31,16 @@ void InitServo()
 {
     ServoX.attach(PIN_SERVO_X);
     ServoY.attach(PIN_SERVO_Y);
+    if(!ServoX.attached() || !ServoY.attached()){
+        ReportError("Servo failed to attach!");
+        while (1);
+    }
 }
 
 int InitIMU() {
     if(!bno08x.begin_I2C()){
         ReportError("BNO085 IMU failed to Start!");
+        while(1);
         return 0;//If the sensor doesn't connect then the function returns 0 and quits
     }
     setReportsBno08x(); //Tells the sensor what data to output.
@@ -45,7 +50,8 @@ int InitIMU() {
 void InitSerialPort(){
     Serial.begin(115200);
     while(!Serial) delayMicroseconds(1000);//Waits for the serial to begin. Checks every 1000 microseconds until it connects.
-    Wire.begin();//Begins I2C protocol with the sensor.
+    Wire.begin(19, 20);//Begins I2C protocol with the sensor.
+    delay(1000);
 };
 
 void InitBarometer() {

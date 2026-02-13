@@ -2,12 +2,12 @@
 
 // Name: DataCollection
 // Description: Functions related to the controlling motion (Example: servos for TVC, parachute deployment, etc)
-// Devices: BME280 Barometer (used for sensing pressure and calculating height. See the docs on how to do that), BNO085 accelerometer
+// Devices: BMP280 Barometer (used for sensing pressure and calculating height. See the docs on how to do that), BNO085 accelerometer
 // Skills: Reading and implementing documentation (lots of resources are available, you just need to implment them!)
 
 // Dibs: Eli C.,Drew F
 
-Adafruit_BME280 barometer; // use I2C interface
+Adafruit_BMP280 barometer; // use I2C interface
 Adafruit_BNO08x bno08x;
 
 // Example:
@@ -74,9 +74,17 @@ Acceleration GetAcceleration()
     return globalAcceleration;
 }
 
-float GetAltitude()
+float GetAltitude(int type)
 {
-    return (barometer.readAltitude(reference_pressure));
+    if (type == AGL) // Above ground level (calibrated to 0m at launch)
+    {
+        return (barometer.readAltitude(reference_pressure));
+    }
+    else if (type == MSL) // Mean sea level (so Denver would be at around 1600m)
+    {
+        return (barometer.readAltitude(1013.25));
+    }
+    return 0;
 }
 
 void ResetBarometer()
@@ -84,7 +92,8 @@ void ResetBarometer()
     reference_pressure = barometer.readPressure();
 }
 
-Orientation GetDecoupledOrientation(){
+Orientation GetDecoupledOrientation()
+{
     Orientation tempOrientation = globalOrientation;
     return tempOrientation;
 }

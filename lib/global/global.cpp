@@ -1,6 +1,7 @@
 // File: lib/global/global.cpp
 // Description: Definitions for global variables and helper utilities
 //
+
 #include "global.h"
 
 int state = 0;

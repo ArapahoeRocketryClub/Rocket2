@@ -18,7 +18,7 @@
 // I know that initializing each component separately looks like a waste of space, but it will help us catch errors faster -Bora
 void InitBoard(); // Begin serial communication, ensure power, whatever.
 int InitIMU();   // BNO085
-void InitBarometer(); // BME280
+void InitBarometer(); // BMP280
 void InitRadio(); // NRF24
 void TestSystems(); // Blink LED, move TVC mount within range of motion to see if anything blocks it, etc
 void InitServo();

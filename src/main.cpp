@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <Adafruit_BNO08x.h>
-#include <Adafruit_BME280.h>
+#include <Adafruit_BMP280.h>
 #include <RF24.h>
 
 // INTERNAL LIBRARIES (Use "")
@@ -20,6 +20,7 @@
 
 pid pidServoX(1, 1, 1); // FIXME: Tune PID values
 pid pidServoY(1, 1, 1); // FIXME: Tune PID values
+void PrintDebug(); // Prints debug info to serial monitor
 
 void setup()
 {
@@ -82,7 +83,7 @@ void StateMachine()
 
         // Transition
         // when velocity is a very small value, the rocket has touched down
-        if(GetAltitude() <= 5 || GetAcceleration().x < 0.2f){
+        if(GetAltitude(AGL) <= 5){
             state = TOUCHDOWN;
         }
         break;
@@ -90,18 +91,41 @@ void StateMachine()
         // Function
         break;
 
-    default:
+    default: // Otherwise
         ReportError(F("Someone's gonna get the boot"));
     }
 }
 
 void loop()
 {
-    StateMachine();
-    QuaternionRotation tempOrientation = GetOrientation();
-    Serial.print("Orientation w: %f i: %f j: %f k: %f\n");
-    Serial.print(tempOrientation.w);
-    Serial.print(tempOrientation.i);
-    Serial.print(tempOrientation.j);
-    Serial.println(tempOrientation.k);
+    //StateMachine();
+    PrintDebug();
+}
+
+void PrintDebug()
+{
+    Serial.print("=======");
+    Serial.print(millis()/1000.00);
+    Serial.println("sec =======");
+    Serial.print("State: ");
+    Serial.println(state);
+    Serial.print("Orientation: ");
+    Serial.print(GetOrientation().w);
+    Serial.print(", ");
+    Serial.print(GetOrientation().i);
+    Serial.print(", ");
+    Serial.print(GetOrientation().j);
+    Serial.print(", ");
+    Serial.println(GetOrientation().k);
+    Serial.print("Acceleration: ");
+    Serial.print(GetAcceleration().x);
+    Serial.print(", ");
+    Serial.print(GetAcceleration().y);
+    Serial.print(", ");
+    Serial.println(GetAcceleration().z);
+    Serial.print("Altitude AGL: ");
+    Serial.println(GetAltitude(AGL));
+    Serial.print("Altitude MSL: ");
+    Serial.println(GetAltitude(MSL));
+    delay(300);
 }

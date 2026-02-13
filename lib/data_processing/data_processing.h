@@ -16,7 +16,7 @@
 // Code to run at beginning
 #ifndef DATATMPSLIB
 #define DATATMPSLIB
-namespace dataTemps {//Temporary Variables to be used for data processing.
+namespace dataTemps { //Temporary Variables to be used for data processing.
     extern Acceleration accel;//Stores acceleration data.
     extern QuaternionRotation angPos;//Stores angular data.
     extern Position position;
@@ -42,7 +42,7 @@ namespace dataTemps {//Temporary Variables to be used for data processing.
 void initDataHolders();//Adds inital data to temporary variables such as position and acceleration
 
 // Code to run repeatedly
-void filterData();//Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
+void filterAccelerationData();//Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
 void calculateNewState();//Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
 void formatData();//Converts the orientation to decoupled Euler angles so it can be put in the global variables.
 void updateGlobalData();//Updates the global position and orientation with new data.

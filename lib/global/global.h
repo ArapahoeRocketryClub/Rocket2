@@ -23,6 +23,9 @@
 #include <Servo.h>
 #endif
 
+#define AGL 0
+#define MSL 1
+
 // INTERNAL LIBRARIES (Use "")
 // The "global" file is like a community pile for data. It hosts our custom data types (vectors, usually in the form of structs)
 // This should be used for things used by more than a single file. All other variables should be contained within their file.
