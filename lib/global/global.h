@@ -64,6 +64,9 @@ const int PIN_LED = -1;
 const int RADIO_PIN_CE = -1;
 const int RADIO_PIN_CSN = -1;
 
+const uint8_t PIN_I2C_SDA = 4;   // GPIO4  (D2)
+const uint8_t PIN_I2C_SCL = 5;   // GPIO5  (D1)
+
 const double pGain = 1;
 const double iGain = 1;
 const double dGain = 1;

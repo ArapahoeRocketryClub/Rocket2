@@ -10,7 +10,8 @@
 
 // Dibs: Jordan.T, Bora
 
-void InitLED(){
+void InitLED()
+{
     pinMode(PIN_LED, OUTPUT);
 }
 
@@ -31,34 +32,54 @@ void InitServo()
 {
     ServoX.attach(PIN_SERVO_X);
     ServoY.attach(PIN_SERVO_Y);
-    if(!ServoX.attached() || !ServoY.attached()){
+    if (!ServoX.attached() || !ServoY.attached())
+    {
         ReportError("Servo failed to attach!");
-        while (1);
+        while (1)
+            ;
     }
 }
 
-int InitIMU() {
-    if(!bno08x.begin_I2C()){
+int InitIMU()
+{
+    if (!bno08x.begin_I2C())
+    {
         ReportError("BNO085 IMU failed to Start!");
-        while(1);
-        return 0;//If the sensor doesn't connect then the function returns 0 and quits
+        while (1)
+        {
+            delay(1000);
+        }
+        return 0; // If the sensor doesn't connect then the function returns 0 and quits
     }
-    setReportsBno08x(); //Tells the sensor what data to output.
-    return 1; //Returns one if sensor connects
+    setReportsBno08x(); // Tells the sensor what data to output.
+    Serial.println("BNO GOOD!!!");
+    return 1; // Returns one if sensor connects
 };
 
-void InitSerialPort(){
+void InitSerialPort()
+{
     Serial.begin(115200);
-    while(!Serial) delayMicroseconds(1000);//Waits for the serial to begin. Checks every 1000 microseconds until it connects.
-    Wire.begin(19, 20);//Begins I2C protocol with the sensor.
+    while (!Serial)
+        delayMicroseconds(1000); // Waits for the serial to begin. Checks every 1000 microseconds until it connects.
+    Wire.begin(PIN_I2C_SDA, PIN_I2C_SCL);
+    Wire.setClock(400000);
     delay(1000);
 };
 
-void InitBarometer() {
-    if (!barometer.begin()) {
-    ReportError("BME fail");
-    while (1);
-  }
+void InitBarometer()
+{
+    if (!barometer.begin(0x76))
+    {
+        Wire.setClock(100000);
+
+        if (!barometer.begin(0x76))
+        {
+            ReportError("BME fail");
+            while (1)
+            {
+                delay(1000);
+            }
+        }
+        Serial.println("BME Success!");
+    }
 }
-
-
