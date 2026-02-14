@@ -22,15 +22,13 @@ Adafruit_BNO08x bno08x;
 
 sh2_SensorValue_t sensorValue;
 
-int setReportsBno08x() // Evil code to return 0 if either report fails to enable, 1 otherwise.
-{
+bool setReportsBno08x() {
     bool status = true;
-    status &= bno08x.enableReport(SH2_ROTATION_VECTOR, 50000);
-    status &= bno08x.enableReport(SH2_ACCELEROMETER, 50000);
-    return status ? 1 : 0;
+    status &= bno08x.enableReport(SH2_ROTATION_VECTOR, 20000);
+    status &= bno08x.enableReport(SH2_ACCELEROMETER,   20000);
+    return status;
 }
-
-double GetServoRotation(Servo& servo)
+double GetServoRotation(Servo &servo)
 {
     return servo.read();
 }
@@ -42,26 +40,31 @@ int checkImuForData()
         setReportsBno08x();
     }
 
-    if (bno08x.getSensorEvent(&sensorValue))
+    if (!bno08x.getSensorEvent(&sensorValue))
     {
-        switch (sensorValue.sensorId)
-        {
-        case SH2_ROTATION_VECTOR: // Checks if sensor has rotation orientation data
-            // Updates global quaternion orientation with sensor data if it is available.
-            globalQuaternionOrientation.w = sensorValue.un.rotationVector.real;
-            globalQuaternionOrientation.i = sensorValue.un.rotationVector.i;
-            globalQuaternionOrientation.j = sensorValue.un.rotationVector.j;
-            globalQuaternionOrientation.k = sensorValue.un.rotationVector.k;
-            break;
-        case SH2_ACCELEROMETER: // Checks if data in the sensor is acceleration data.
-            // Updates global acceleration data with sensor data if it's available.
-            globalAcceleration.x = sensorValue.un.accelerometer.x;
-            globalAcceleration.y = sensorValue.un.accelerometer.y;
-            globalAcceleration.z = sensorValue.un.accelerometer.z;
-            break;
-        }
+        return 0;
     }
-    return 1;
+
+    if (sensorValue.sensorId == SH2_ROTATION_VECTOR)
+    {
+        // Updates global quaternion orientation with sensor data if it is available.
+        globalQuaternionOrientation.w = sensorValue.un.rotationVector.real;
+        globalQuaternionOrientation.i = sensorValue.un.rotationVector.i;
+        globalQuaternionOrientation.j = sensorValue.un.rotationVector.j;
+        globalQuaternionOrientation.k = sensorValue.un.rotationVector.k;
+        return 1;
+    }
+
+    if (sensorValue.sensorId == SH2_ACCELEROMETER)
+    {
+        // Updates global acceleration data with sensor data if it's available.
+        globalAcceleration.x = sensorValue.un.accelerometer.x;
+        globalAcceleration.y = sensorValue.un.accelerometer.y;
+        globalAcceleration.z = sensorValue.un.accelerometer.z;
+        return 1;
+    }
+
+    return 0;
 }
 QuaternionRotation GetOrientation()
 {
@@ -88,7 +91,7 @@ float GetAltitude(int type)
 
 void ResetBarometer()
 {
-    reference_pressure = barometer.readPressure();
+    reference_pressure = barometer.readPressure() / 100.0; // Conversion from Pa to hPa
 }
 
 Orientation GetDecoupledOrientation()

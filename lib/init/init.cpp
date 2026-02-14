@@ -52,7 +52,12 @@ int InitIMU()
         }
         return 0; // If the sensor doesn't connect then the function returns 0 and quits
     }
-    setReportsBno08x(); // Tells the sensor what data to output.
+    if(!setReportsBno08x()) {
+        ReportError("Failed to set BNO08x reports!");
+        while(1) {
+            delay(1000);
+        }
+    }
     Serial.println("BNO GOOD!!!");
     return 1; // Returns one if sensor connects
 };
@@ -60,8 +65,9 @@ int InitIMU()
 void InitSerialPort()
 {
     Serial.begin(115200);
-    while (!Serial)
+    while (!Serial) {
         delayMicroseconds(1000); // Waits for the serial to begin. Checks every 1000 microseconds until it connects.
+    }
     Wire.begin(PIN_I2C_SDA, PIN_I2C_SCL);
     Wire.setClock(400000);
     delay(1000);
@@ -83,4 +89,5 @@ void InitBarometer()
         }
         Serial.println("BME Success!");
     }
+    ResetBarometer();
 }

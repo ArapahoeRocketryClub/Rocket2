@@ -28,6 +28,7 @@ void setup()
     Serial.println(F("Arduino is now online!"));
     InitIMU();
     InitServo();
+    InitBarometer();
 }
 
 void ControlThrustVector()
@@ -104,6 +105,7 @@ void loop()
 
 void PrintDebug()
 {
+    checkImuForData();
     Serial.print("=======");
     Serial.print(millis()/1000.00);
     Serial.println("sec =======");
@@ -127,5 +129,7 @@ void PrintDebug()
     Serial.println(GetAltitude(AGL));
     Serial.print("Altitude MSL: ");
     Serial.println(GetAltitude(MSL));
+    Serial.print("Pressure (Pa): ");
+    Serial.println(barometer.readPressure());
     delay(300);
 }
