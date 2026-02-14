@@ -22,16 +22,15 @@ Adafruit_BNO08x bno08x;
 
 sh2_SensorValue_t sensorValue;
 
-int setReportsBno08x()
-{ // Enables reports for specific types of data
-    if (!bno08x.enableReport(SH2_ROTATION_VECTOR, 50000))
-    {             // This asks the sensor to give orientation data every 50000 microseconds (This is 50 miliseconds).
-        return 0; // Failure
-    }
-    return 1; // Success only happens if all of the report enabling is successful.
-};
+int setReportsBno08x() // Evil code to return 0 if either report fails to enable, 1 otherwise.
+{
+    bool status = true;
+    status &= bno08x.enableReport(SH2_ROTATION_VECTOR, 50000);
+    status &= bno08x.enableReport(SH2_ACCELEROMETER, 50000);
+    return status ? 1 : 0;
+}
 
-double GetServoRotation(Servo servo)
+double GetServoRotation(Servo& servo)
 {
     return servo.read();
 }

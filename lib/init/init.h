@@ -8,6 +8,8 @@
 #include <Arduino.h>
 #include <RF24.h>
 #include <Adafruit_BNO08x.h>
+#include <Wire.h>
+
 
 // INTERNAL LIBRARIES (Use "")
 #include "global.h"

@@ -1,11 +1,8 @@
-#ifndef ARDUINO
-#define ARDUINO
 #include <Arduino.h>
 #include <Servo.h>
-#endif
 
-#ifndef PID
-#define PID
+#ifndef PID_H
+#define PID_H
 
 float outputSignalCalc(float integral, float derivative, float error, float kp, float ki, float kd);
 //void moveServo(Servo servoToMove, float integral, float derivative, float error, float kp, float ki, float kd);
@@ -25,7 +22,7 @@ private:
     float error;
     unsigned long now;
     float prevError;
-    float prevTime;
+    unsigned long prevTime;
     float integralVal;
     float derivativeVal;
 };

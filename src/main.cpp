@@ -49,11 +49,11 @@ void StateMachine()
         if (ARM_STATUS == true)
         {
             state = ARMED;
+            ResetBarometer();
         }
         break;
     case ARMED:
         // Function
-        ResetBarometer();
         // Transition
         
         break;

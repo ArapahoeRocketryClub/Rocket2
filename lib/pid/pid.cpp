@@ -43,6 +43,18 @@ namespace pidTemps {
 //     MoveServo(ServoX,0,derivative.y,newOrientation.y,KPY,KIY,KDY);
 // }
 
+pid::pid(float KP, float KI, float KD)
+{
+    kP = KP;
+    kI = KI;
+    kD = KD;
+    error = 0;
+    prevError = 0;
+    integralVal = 0;
+    derivativeVal = 0;
+    prevTime = millis();
+}
+
 float pid::compute(float input, float target)
 {
     float error = target - input;
@@ -53,18 +65,8 @@ float pid::compute(float input, float target)
         derivativeVal = (error - prevError) / dt;
     }
     integralVal += error * dt;
-    //integral += constrain(error * dt, SOME MIN VALUE, SOME MAX VALUE); // Prevents integral windup
+    integralVal = constrain(integralVal, -1000.0f, 1000.0f); // Prevents integral windup
     prevError = error;
     prevTime = now;
     return kP * error + kI * integralVal + kD * derivativeVal;
-}
-
-pid::pid(float KP, float KI, float KD)
-{
-    kP = KP;
-    kI = KI;
-    kD = KD;
-    error = 0;
-    prevError = 0;
-    integralVal = 0;
 }

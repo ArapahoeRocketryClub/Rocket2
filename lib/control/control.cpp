@@ -11,21 +11,14 @@
 
 // Dibs: Alex todd, Jacob B.
 
-void MoveServo(Servo servo, double rotation)
+void MoveServo(Servo& servo, double rotation)
 {
     servo.write((rotation * PI) / 180);
 }
 
 void SetLight(bool state, int pin)
 {
-    if (state == true)
-    {
-        digitalWrite(LED_BUILTIN, HIGH);
-    }
-    if (state == false)
-    {
-        digitalWrite(LED_BUILTIN, LOW);
-    }
+    digitalWrite(pin, state ? HIGH : LOW);
 }
 
 void servoTestRotation()

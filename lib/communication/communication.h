@@ -3,12 +3,8 @@
 // EXTERNAL LIBRARIES (Use <>)
 #ifndef COMMUNICATIONLIB
 #define COMMUNICATIONLIB
-#endif
 
-#ifndef ARDUINOLIB
-#define ARDUINOLIB
 #include <Arduino.h>
-#endif
 
 #ifndef RF24LIB
 #define RF24LIB
@@ -28,3 +24,4 @@
 
 void SendSignal(byte data);
 void InterpretSignal(int signal);
+#endif

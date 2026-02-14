@@ -4,12 +4,8 @@
 // EXTERNAL LIBRARIES (Use <>)
 #ifndef TERMINATIONLIB
 #define TERMINATIONLIB
-#endif
 
-#ifndef ARDUINOLIB
-#define ARDUINOLIB
 #include <Arduino.h>
-#endif
 
 // INTERNAL LIBRARIES (Use "")
 #ifndef GLOBALLIB
@@ -23,3 +19,4 @@
 #endif
 
 // Header files are used to ensure that the files can communicate with each other
+#endif

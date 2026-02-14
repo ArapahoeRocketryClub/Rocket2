@@ -32,7 +32,7 @@ BMP280
 extern Adafruit_BMP280 barometer;
 extern Adafruit_BNO08x bno08x;
 
-double GetServoRotation(Servo servo);
+double GetServoRotation(Servo& servo);
 int setReportsBno08x();               // Tells the BNO08x what data to output needs to be updated every time sensor is reset.
 int checkImuForData();                // Checks for new IMU data. If so, the function returns 1 and stores the data in the global variables.
 QuaternionRotation GetOrientation();  // Returns quaternion orientation.

@@ -29,6 +29,10 @@ void initDataHolders()
 
     dataTemps::formattedOrientation.x = 0;
     dataTemps::formattedOrientation.y = 0;
+
+    dataTemps::filterAccelX = kFilter(MeasVarAccel, 0);
+    dataTemps::filterAccelY = kFilter(MeasVarAccel, 0);
+    dataTemps::filterAccelZ = kFilter(MeasVarAccel, 0);
 };
 
 void filterAccelerationData()

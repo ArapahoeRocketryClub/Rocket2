@@ -16,20 +16,19 @@
 // Code to run at beginning
 #ifndef DATATMPSLIB
 #define DATATMPSLIB
-namespace dataTemps { //Temporary Variables to be used for data processing.
-    extern Acceleration accel;//Stores acceleration data.
-    extern QuaternionRotation angPos;//Stores angular data.
+namespace dataTemps
+{                                     // Temporary Variables to be used for data processing.
+    extern Acceleration accel;        // Stores acceleration data.
+    extern QuaternionRotation angPos; // Stores angular data.
     extern Position position;
     extern Orientation formattedOrientation;
-    extern QuaternionRotation initalReferenceRotation;//Stores the initial orientation of the rocket to be used as a reference point.
-    
-    kFilter filterAccelX(MeasVarAccel,0);
-    kFilter filterAccelY(MeasVarAccel,0);
-    kFilter filterAccelZ(MeasVarAccel,0);
+    extern QuaternionRotation initalReferenceRotation; // Stores the initial orientation of the rocket to be used as a reference point.
+    extern kFilter filterAccelX;
+    extern kFilter filterAccelY;
+    extern kFilter filterAccelZ;
 }
 
-
-//Numbers defining the axis that the servo can rotate the the rocket around (0,0,1) is in direction of nose.
+// Numbers defining the axis that the servo can rotate the the rocket around (0,0,1) is in direction of nose.
 #define SERVOAXISX1 0
 #define SERVOAXISY1 1
 #define SERVOAXISZ1 0
@@ -39,17 +38,16 @@ namespace dataTemps { //Temporary Variables to be used for data processing.
 #define SERVOAXISZ2 0
 
 #endif
-void initDataHolders();//Adds inital data to temporary variables such as position and acceleration
+void initDataHolders(); // Adds inital data to temporary variables such as position and acceleration
 
 // Code to run repeatedly
-void filterAccelerationData();//Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
-void calculateNewState();//Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
-void formatData();//Converts the orientation to decoupled Euler angles so it can be put in the global variables.
-void updateGlobalData();//Updates the global position and orientation with new data.
-void updateLocalData();//Takes sensors and store it into dataTemps.
-void initialRotation();//Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
-//AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
-//Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
-
+void filterAccelerationData(); // Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
+void calculateNewState();      // Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
+void formatData();             // Converts the orientation to decoupled Euler angles so it can be put in the global variables.
+void updateGlobalData();       // Updates the global position and orientation with new data.
+void updateLocalData();        // Takes sensors and store it into dataTemps.
+void initialRotation();        // Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
+// AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
+// Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
 
 #endif
