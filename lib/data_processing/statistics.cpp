@@ -72,7 +72,7 @@ QuaternionRotation swingTwistDecompositionPartialT(Position axis, QuaternionRota
 QuaternionRotation swingTwistDecompositionPartialS(QuaternionRotation twist, QuaternionRotation rotation)
 {
     QuaternionRotation inverseTwist;
-    inverseTwist = quaternionInverse(rotation);
+    inverseTwist = quaternionInverse(twist);
     return quaternionMultiply(rotation, inverseTwist);
 }
 

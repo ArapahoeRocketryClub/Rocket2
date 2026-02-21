@@ -3,10 +3,7 @@
 #define GLOBALLIB
 
 // EXTERNAL LIBRARIES (Use <>)
-#ifndef ARDUINOLIB
-#define ARDUINOLIB
 #include <Arduino.h>
-#endif
 
 #ifndef RF24LIB
 #define RF24LIB
@@ -56,8 +53,8 @@ enum STATE_MACHINE_STATES
 
 // Constants --- PINS ARE PLACEHOLDERS FOR NOW
 
-const int PIN_SERVO_X = -1;
-const int PIN_SERVO_Y = -1;
+const int PIN_SERVO_X = D6;
+const int PIN_SERVO_Y = D7;
 
 const int PIN_LED = -1;
 
@@ -116,6 +113,22 @@ struct AngularVelocity
     double z; // z angular velocity in !RADIANS/SECOND!
 };
 
+struct TVCServo
+{
+private:
+    Servo s;
+    int pin;
+    double zeroAngleRadians;
+
+public:
+    float currentAngleRadians;
+
+    TVCServo(int p, double zero);
+    void init();
+    void write(float targetAngleRadians);
+    bool isAttached();
+};
+
 typedef struct AngularVelocity AngularPosition;
 
 void ReportError(String error); // Publishes an error by sending it over radio and enabling led
@@ -128,8 +141,8 @@ extern QuaternionRotation globalQuaternionOrientation;
 extern float Temperature;
 extern float Humidity;
 extern float Pressure;
-extern Servo ServoX;
-extern Servo ServoY;
+extern TVCServo ServoX;
+extern TVCServo ServoY;
 extern RF24 radio;
 extern Adafruit_BNO08x bno08x; // This is the IMU sensor object.
 #endif

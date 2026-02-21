@@ -31,9 +31,9 @@ void InitRadio()
 
 void InitServo()
 {
-    ServoX.attach(PIN_SERVO_X);
-    ServoY.attach(PIN_SERVO_Y);
-    if (!ServoX.attached() || !ServoY.attached())
+    ServoX.init();
+    ServoY.init();
+    if (!ServoX.isAttached() || !ServoY.isAttached())
     {
         ReportError("Servo failed to attach!");
         while (1)

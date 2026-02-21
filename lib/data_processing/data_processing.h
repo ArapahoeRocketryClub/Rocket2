@@ -22,7 +22,7 @@ namespace dataTemps
     extern QuaternionRotation angPos; // Stores angular data.
     extern Position position;
     extern Orientation formattedOrientation;
-    extern QuaternionRotation initalReferenceRotation; // Stores the initial orientation of the rocket to be used as a reference point.
+    extern QuaternionRotation initialReferenceRotation; // Stores the initial orientation of the rocket to be used as a reference point.
     extern kFilter filterAccelX;
     extern kFilter filterAccelY;
     extern kFilter filterAccelZ;
@@ -38,7 +38,7 @@ namespace dataTemps
 #define SERVOAXISZ2 0
 
 #endif
-void initDataHolders(); // Adds inital data to temporary variables such as position and acceleration
+void initDataHolders(); // Adds initial data to temporary variables such as position and acceleration
 
 // Code to run repeatedly
 void filterAccelerationData(); // Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
@@ -47,7 +47,7 @@ void formatData();             // Converts the orientation to decoupled Euler an
 void updateGlobalData();       // Updates the global position and orientation with new data.
 void updateLocalData();        // Takes sensors and store it into dataTemps.
 void initialRotation();        // Sets the initial orientation of the rocket to be used as a reference point for all future orientation data.
-// AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
+//AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q);//Converts a quaternion rotation to Euler angles in the body 321 zyx axis representation.
 // Orientation eulerBody321ToDecoupledAngles(AngularPosition eulerBody321);//Converts body 321 Euler angles to decoupled Euler angles.
 
 #endif

@@ -5,6 +5,17 @@
 // Skills: Strong foundations in math and physics. Must be comfortable and enjoy working with vectors, matrices, and numbers. Also requires a strong sense of analyzing inputs/outputs, as most of this deals with converting raw data into usable numbers
 
 // Dibs: Jordan T.,Drew F,Jacob B
+namespace dataTemps
+{                              // Temporary Variables to be used for data processing.
+    Acceleration accel;        // Stores acceleration data.
+    QuaternionRotation angPos; // Stores angular data.
+    Position position;
+    Orientation formattedOrientation;
+    QuaternionRotation initialReferenceRotation; // Stores the initial orientation of the rocket to be used as a reference point.
+    kFilter filterAccelX(1, 1);
+    kFilter filterAccelY(1, 1);
+    kFilter filterAccelZ(1, 1);
+}
 
 void initDataHolders()
 {
@@ -22,10 +33,10 @@ void initDataHolders()
     dataTemps::position.y = 0;
     dataTemps::position.z = 0;
 
-    dataTemps::initalReferenceRotation.w = 1;
-    dataTemps::initalReferenceRotation.i = 0;
-    dataTemps::initalReferenceRotation.j = 0;
-    dataTemps::initalReferenceRotation.k = 0;
+    dataTemps::initialReferenceRotation.w = 1;
+    dataTemps::initialReferenceRotation.i = 0;
+    dataTemps::initialReferenceRotation.j = 0;
+    dataTemps::initialReferenceRotation.k = 0;
 
     dataTemps::formattedOrientation.x = 0;
     dataTemps::formattedOrientation.y = 0;
@@ -52,7 +63,7 @@ void updateGlobalData()
 void initialRotation()
 {
     QuaternionRotation currentRotation = GetOrientation();
-    dataTemps::initalReferenceRotation = currentRotation;
+    dataTemps::initialReferenceRotation = currentRotation;
 }
 
 void updateLocalData()
@@ -67,7 +78,7 @@ void calculateNewState()
     QuaternionRotation rotateInitToCurrent; // Quaternion orientation relative to init quaternion orientation.
     QuaternionRotation twist;               // Quaternion rotation about servo 1 axis.
     QuaternionRotation swing;               // Quaternion rotation about servo 2 axis.
-    rotateInitToCurrent = quaternionMultiply(dataTemps::angPos, quaternionInverse(dataTemps::initalReferenceRotation));
+    rotateInitToCurrent = quaternionMultiply(dataTemps::angPos, quaternionInverse(dataTemps::initialReferenceRotation));
 
     Position servo1Axis;
     servo1Axis.x = SERVOAXISX1;
@@ -91,8 +102,10 @@ void calculateNewState()
     dataTemps::formattedOrientation.x = 2 * acos(twist.w); // Angle of the quaternion rotation
     dataTemps::formattedOrientation.y = 2 * acos(swing.w); // Angle of the quaternion rotation
 }
+
 /*
-AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
+AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q)
+{
     AngularPosition angles;
     // Yaw (z-axis rotation)
     angles.z = atan2(2.0 * (q.w * q.j - q.i * q.k), 1.0 - 2.0 * (q.j * q.j + q.k * q.k));
@@ -101,5 +114,4 @@ AngularPosition eulerBody321AnglesFromQuaternion(QuaternionRotation q){
     // Roll (x-axis rotation)
     angles.x = atan2(2.0 * (q.i * q.w - q.k * q.j), 1.0 - 2.0 * (q.i * q.i + q.k * q.k));
     return angles;
-}
-*/
+}*/
