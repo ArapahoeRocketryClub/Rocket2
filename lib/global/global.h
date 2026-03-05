@@ -75,13 +75,6 @@ const float MeasVarAngVel = 2; // Measurement Variance for angular velocity (wil
 
 extern uint8_t address[][6]; // For radio
 
-struct Position
-{
-    double x; // x position in meters, relative to point at init
-    double y; // y position in meters, relative to point at init
-    double z; // z position in meters, relative to point at init
-};
-
 struct Acceleration
 {
     double x; // x acceleration in meters/s^2
@@ -130,6 +123,8 @@ public:
 };
 
 typedef struct AngularVelocity AngularPosition;
+typedef struct Acceleration Velocity;
+typedef struct Acceleration Position;
 
 void ReportError(String error); // Publishes an error by sending it over radio and enabling led
 

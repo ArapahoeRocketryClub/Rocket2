@@ -18,10 +18,13 @@
 #define DATATMPSLIB
 namespace dataTemps
 {                                     // Temporary Variables to be used for data processing.
-    extern Acceleration accel;        // Stores acceleration data.
+    extern Acceleration accel;        // Stores acceleration data for global frame of reference (current cycle).
+    extern Acceleration accelPrev;        // Stores acceleration data for global frame of reference (previous cycle).
+    extern Velocity velocity;         // Stores velocity data for global reference frame.
+    extern Position position;         // Stores position data for global reference frame.
+    
     extern QuaternionRotation angPos; // Stores angular data.
-    extern Position position;
-    extern Orientation formattedOrientation;
+    extern Orientation formattedOrientation; // Orientation decomposed into two angles about each of the servo axes.
     extern QuaternionRotation initialReferenceRotation; // Stores the initial orientation of the rocket to be used as a reference point.
     extern kFilter filterAccelX;
     extern kFilter filterAccelY;
@@ -42,7 +45,7 @@ void initDataHolders(); // Adds initial data to temporary variables such as posi
 
 // Code to run repeatedly
 void filterAccelerationData(); // Takes data from sensors and uses the Kalman filter to improce the raw sensor data.
-void calculateNewState();      // Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
+void calculateNewState(double deltaTime);      // Uses the filtered angular velocity to calculate new orientation and uses this orientation and acceleration to calulate new global position.
 void formatData();             // Converts the orientation to decoupled Euler angles so it can be put in the global variables.
 void updateGlobalData();       // Updates the global position and orientation with new data.
 void updateLocalData();        // Takes sensors and store it into dataTemps.

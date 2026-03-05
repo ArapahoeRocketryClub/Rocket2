@@ -24,6 +24,10 @@ void initDataHolders()
     dataTemps::accel.y = 0;
     dataTemps::accel.z = 0;
 
+    dataTemps::accelPrev.x = 0;
+    dataTemps::accelPrev.y = 0;
+    dataTemps::accelPrev.z = 0;
+
     dataTemps::angPos.w = 1;
     dataTemps::angPos.i = 0;
     dataTemps::angPos.j = 0;
@@ -46,7 +50,7 @@ void initDataHolders()
     dataTemps::filterAccelZ = kFilter(MeasVarAccel, 0);
 };
 
-void filterAccelerationData()
+void filterAccelerationData()//Applies kalman filter to acceleration data. This function is already called by other functions so there shouldn't be a reason to call it in main.
 {
     Acceleration accelTemp = GetAcceleration(); // Steps kalman filters for the accelertation measurements and stores the new estimates into the temporary acceleration variable
     dataTemps::accel.x = dataTemps::filterAccelX.step(accelTemp.x);
@@ -68,18 +72,22 @@ void initialRotation()
 
 void updateLocalData()
 {
-    dataTemps::accel = GetAcceleration();
     dataTemps::angPos = GetOrientation();
     // Update translational accel here
 }
 
-void calculateNewState()
+void calculateNewState(double deltaTime)
 {
     QuaternionRotation rotateInitToCurrent; // Quaternion orientation relative to init quaternion orientation.
+    QuaternionRotation rotateCurrentToInit; // Quaternion orientation of initial reference point relative to rocket.
     QuaternionRotation twist;               // Quaternion rotation about servo 1 axis.
     QuaternionRotation swing;               // Quaternion rotation about servo 2 axis.
     rotateInitToCurrent = quaternionMultiply(dataTemps::angPos, quaternionInverse(dataTemps::initialReferenceRotation));
+    rotateCurrentToInit = quaternionInverse(rotateInitToCurrent);
 
+
+
+    //This stuff calculates the decoupled angles about the servo axes.V V V V
     Position servo1Axis;
     servo1Axis.x = SERVOAXISX1;
     servo1Axis.y = SERVOAXISY1;
@@ -101,6 +109,30 @@ void calculateNewState()
 
     dataTemps::formattedOrientation.x = 2 * acos(twist.w); // Angle of the quaternion rotation
     dataTemps::formattedOrientation.y = 2 * acos(swing.w); // Angle of the quaternion rotation
+
+
+
+    //This stuff calculates the translational position of the imu. V V V
+    dataTemps::accelPrev = dataTemps::accel;
+    filterAccelerationData();//Filtering could be done after rotation.
+    dataTemps::accel = rotateVecQuaternion(dataTemps::accel,rotateCurrentToInit);//Convert acceleration from local to global reference frame.
+    
+    //Integrate acceleration using trapezoidal rule.
+    Velocity accelIntegral;
+    accelIntegral.x = ((dataTemps::accelPrev.x + dataTemps::accel.x) / 2.0) * deltaTime;
+    accelIntegral.y = ((dataTemps::accelPrev.y + dataTemps::accel.y) / 2.0) * deltaTime;
+    accelIntegral.z = ((dataTemps::accelPrev.z + dataTemps::accel.z) / 2.0) * deltaTime;
+    dataTemps::velocity.x += accelIntegral.x;
+    dataTemps::velocity.y += accelIntegral.y;
+    dataTemps::velocity.z += accelIntegral.z;
+
+    //If the velocity data needed to be filtered it would be done here.
+
+    //Integrate velocity with riemann sum. (Might need to change to trapezoidal)
+    dataTemps::position.x += dataTemps::velocity.x * deltaTime;
+    dataTemps::position.y += dataTemps::velocity.y * deltaTime;
+    dataTemps::position.z += dataTemps::velocity.z * deltaTime;
+
 }
 
 /*

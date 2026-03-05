@@ -123,7 +123,7 @@ void PrintDebug()
 {
     checkImuForData();
     updateLocalData();
-    calculateNewState();
+    calculateNewState(1);//Assumes deltaTime is 30 seconds.
     updateGlobalData();
     
     //Time and State information
