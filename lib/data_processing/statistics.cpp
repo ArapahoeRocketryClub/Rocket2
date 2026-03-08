@@ -93,3 +93,33 @@ Position rotateVecQuaternion(Position vec, QuaternionRotation rotation)
 
     return vec;
 }
+
+Position normVec(Position vec){
+    double mag = 0;
+    mag += square<double>(vec.x);
+    mag += square<double>(vec.y);
+    mag += square<double>(vec.z);
+    mag = sqrt(mag);
+
+    vec.x /= mag;
+    vec.y /= mag;
+    vec.z /= mag;
+
+    return vec;
+}
+
+double dotProduct(Position vec1, Position vec2){
+    double sum = 0;
+    sum += vec1.x * vec2.x;
+    sum += vec1.y * vec2.y;
+    sum += vec1.z * vec2.z;
+    return sum;
+}
+
+Position rotateInXYPlane(double angle, Position vec){
+    Position tempVec;
+    tempVec.x = vec.x * cos(angle) - vec.y * sin(angle);
+    tempVec.y = vec.x * sin(angle) - vec.y * cos(angle);
+    tempVec.z = 0;
+    return tempVec;
+}

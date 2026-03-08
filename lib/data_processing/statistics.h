@@ -65,4 +65,7 @@ QuaternionRotation swingTwistDecompositionPartialT(Position axis, QuaternionRota
 QuaternionRotation swingTwistDecompositionPartialS(QuaternionRotation twist, QuaternionRotation rotation); // Returns swing part of quaternion rotation
 QuaternionRotation normQuaternion(QuaternionRotation rotation);
 Position rotateVecQuaternion(Position vec, QuaternionRotation rotation); // Applies quaternion rotation operation to vector. ijk 3 vec of (q * v * conj(q)).
+Position normVec(Position vec); //Normal of the vector.
+double dotProduct(Position vec1, Position vec2);//Dot Product of two vectors.
+Position rotateInXYPlane(double angle, Position vec);//Rotates a vector in the xy plane by angle radians.
 #endif

@@ -26,6 +26,10 @@ namespace dataTemps
     extern QuaternionRotation angPos; // Stores angular data.
     extern Orientation formattedOrientation; // Orientation decomposed into two angles about each of the servo axes.
     extern QuaternionRotation initialReferenceRotation; // Stores the initial orientation of the rocket to be used as a reference point.
+
+    extern double horizDistAxis1;     //Horizontal distance to the origin along an axis perpendicular to the first servo's rotation axis.
+    extern double horizDistAxis2;     //Horizontal distance to the origin along an axis perpendicular to the second servo's rotation axis.
+
     extern kFilter filterAccelX;
     extern kFilter filterAccelY;
     extern kFilter filterAccelZ;

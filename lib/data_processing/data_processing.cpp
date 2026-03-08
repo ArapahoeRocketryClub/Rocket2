@@ -45,6 +45,9 @@ void initDataHolders()
     dataTemps::formattedOrientation.x = 0;
     dataTemps::formattedOrientation.y = 0;
 
+    dataTemps::horizDistAxis1 = 0;
+    dataTemps::horizDistAxis2 = 0;
+
     dataTemps::filterAccelX = kFilter(MeasVarAccel, 0);
     dataTemps::filterAccelY = kFilter(MeasVarAccel, 0);
     dataTemps::filterAccelZ = kFilter(MeasVarAccel, 0);
@@ -62,6 +65,7 @@ void updateGlobalData()
 {
     globalPosition = dataTemps::position;                // Updates global position variable
     globalOrientation = dataTemps::formattedOrientation; // Updates global orientation variable
+    //Once global variables for distance along servo axes is added they will be updated here from horizDistAxis1/horizDistAxis2.
 };
 
 void initialRotation()
@@ -73,7 +77,7 @@ void initialRotation()
 void updateLocalData()
 {
     dataTemps::angPos = GetOrientation();
-    // Update translational accel here
+    // Acceleration is updated in filterAccelerationData
 }
 
 void calculateNewState(double deltaTime)
@@ -87,7 +91,7 @@ void calculateNewState(double deltaTime)
 
 
 
-    //This stuff calculates the decoupled angles about the servo axes.V V V V
+    //This stuff below calculates the decoupled angles about the servo axes.V V V V
     Position servo1Axis;
     servo1Axis.x = SERVOAXISX1;
     servo1Axis.y = SERVOAXISY1;
@@ -112,7 +116,7 @@ void calculateNewState(double deltaTime)
 
 
 
-    //This stuff calculates the translational position of the imu. V V V
+    //This stuff below calculates the translational position of the imu. V V V
     dataTemps::accelPrev = dataTemps::accel;
     filterAccelerationData();//Filtering could be done after rotation.
     dataTemps::accel = rotateVecQuaternion(dataTemps::accel,rotateCurrentToInit);//Convert acceleration from local to global reference frame.
@@ -133,6 +137,30 @@ void calculateNewState(double deltaTime)
     dataTemps::position.y += dataTemps::velocity.y * deltaTime;
     dataTemps::position.z += dataTemps::velocity.z * deltaTime;
 
+
+
+    //This calculates the component of positional offset for each servo axis. V V V
+    
+    //The servo axis variables are changed here and no longer mean the same thing.
+    //Project onto xy plane.
+    servo1Axis.z = 0;
+    servo2Axis.z = 0;
+
+    //Normalize the servo axis vectors.
+    servo1Axis = normVec(servo1Axis);
+    servo2Axis = normVec(servo2Axis);
+
+    //Get vectors perpendicular to the two axes
+    servo1Axis = rotateInXYPlane(PI/2,servo1Axis);
+    servo2Axis = rotateInXYPlane(PI/2,servo2Axis);
+
+    //Calculate horizontal displacemnet from origin.
+    Position horizPos = dataTemps::position;
+    horizPos.z = 0;
+
+    //Find horizontal distance from origin perpendicular for each axis. 
+    dataTemps::horizDistAxis1 = dotProduct(servo1Axis,horizPos);
+    dataTemps::horizDistAxis2 = dotProduct(servo2Axis,horizPos);
 }
 
 /*
